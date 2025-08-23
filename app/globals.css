@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Themeable Colors - Updated to Purple Gradient Theme */
+    --background: 240 15% 9%; /* Dark purple background */
+    --foreground: 240 5% 96%; /* Light text */
+
+    --muted: 240 8% 15%; /* Darker purple for muted elements */
+    --muted-foreground: 240 5% 70%; /* Muted text */
+    --muted-foreground-light: 240 5% 60%;
+    --muted-foreground-dark: 240 5% 65%;
+
+    --card: 240 10% 12% / 0.8; /* Card background with transparency */
+    --card-foreground: 240 5% 96%;
+
+    --popover: 240 15% 9%;
+    --popover-foreground: 240 5% 96%;
+
+    /* Primary Accent Colors - Updated to Purple Gradient */
+    --primary: 270 100% 70%; /* Bright purple */
+    --primary-foreground: 240 15% 9%; /* Dark text on purple */
+    --primary-dark: 280 100% 60%; /* Darker purple */
+    --primary-light: 260 100% 80%; /* Lighter purple */
+
+    /* Secondary Accent Colors (for buttons, etc.) - Updated */
+    --secondary: 240 5% 96%; /* Light for contrast */
+    --secondary-foreground: 240 15% 9%; /* Dark text */
+
+    --accent: 270 50% 25%; /* Purple accent */
+    --accent-foreground: 240 5% 96%;
+
+    --border: 240 100% 100% / 0.1; /* Subtle borders */
+    --border-light: 240 10% 20% / 0.3;
+    --border-dark: 240 10% 15% / 0.2;
+
+    --ring: 270 100% 70%;
+
+    --radius: 0.75rem; /* Slightly more rounded */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(135deg, hsl(240 15% 9%) 0%, hsl(280 20% 15%) 50%, hsl(240 15% 9%) 100%);
+    min-height: 100vh;
+  }
+}
