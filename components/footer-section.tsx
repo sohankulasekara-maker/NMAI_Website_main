@@ -1,6 +1,6 @@
 "use client"
 
-import { Instagram } from 'lucide-react'
+import { Instagram, Facebook } from 'lucide-react'
 import Image from "next/image"
 
 export function FooterSection() {
@@ -12,6 +12,9 @@ export function FooterSection() {
         <div className="flex justify-start items-start gap-3">
           <a href="https://www.instagram.com/neuromonkey.ai/?igsh=MXZjcG02aDF6Ynpybw%3D%3D" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-4 h-4 flex items-center justify-center">
             <Instagram className="w-full h-full text-muted-foreground" />
+          </a>
+          <a href="https://www.facebook.com/share/16SAkst1am/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-4 h-4 flex items-center justify-center">
+            <Facebook className="w-full h-full text-muted-foreground" />
           </a>
         </div>
       </div>

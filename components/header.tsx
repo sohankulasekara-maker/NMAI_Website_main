@@ -29,7 +29,6 @@ export function Header() {
     { name: "Home", href: "/" },
     { name: "AI Services", href: "#ai-services", hasDropdown: true },
     { name: "Design Services", href: "#digital-services", hasDropdown: true },
-    { name: "Livara AI Agent", href: "https://merely-proper-condor.ngrok-free.app" },
     { name: "FAQ", href: "#faq" },
     { name: "Contact", href: "/contact" },
   ]
