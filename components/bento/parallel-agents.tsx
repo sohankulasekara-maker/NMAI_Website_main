@@ -1,6 +1,5 @@
 import type React from "react";
 import Image from "next/image";
-import projectImg from "/images/Project-Management.jpg";
 
 interface ParallelCodingAgentsProps {
   className?: string;
@@ -28,7 +27,7 @@ const ParallelCodingAgents: React.FC<ParallelCodingAgentsProps> = ({ className =
         }}
       >
         <Image
-          src={projectImg}
+          src="/images/Project-Management.jpg"
           alt="Project Management"
           fill
           sizes={`${CARD_W}px`}
