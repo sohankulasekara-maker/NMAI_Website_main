@@ -1,6 +1,6 @@
 import type React from "react";
 import Image from "next/image";
-import projectImg from "@/public/images/Project-Management.jpg";
+import projectImg from "/images/Project-Management.jpg";
 
 interface ParallelCodingAgentsProps {
   className?: string;
