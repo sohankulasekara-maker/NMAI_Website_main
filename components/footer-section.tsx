@@ -19,15 +19,7 @@ export function FooterSection() {
         </div>
       </div>
       {/* Right Section: Product, Company, Resources */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 p-4 md:p-8 w-full md:w-auto">
-        <div className="flex flex-col justify-start items-start gap-3">
-          <h3 className="text-muted-foreground text-sm font-medium leading-5">Product</h3>
-          <div className="flex flex-col justify-end items-start gap-2">
-            <a href="https://merely-proper-condor.ngrok-free.app" target="_blank" rel="noopener noreferrer" className="text-foreground text-sm font-normal leading-5 hover:underline">
-              Livara AI Agent
-            </a>
-          </div>
-        </div>
+      <div className="flex flex-col gap-8 md:gap-12 p-4 md:p-8 w-full md:w-auto">
         <div className="flex flex-col justify-start items-start gap-3">
           <h3 className="text-muted-foreground text-sm font-medium leading-5">Resources</h3>
           <div className="flex flex-col justify-center items-start gap-2">
