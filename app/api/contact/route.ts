@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,29 +16,19 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Here you would typically integrate with an email service
-    // For now, we'll simulate sending an email
-    console.log('Contact form submission:', { name, email, phone })
-
-    // You can integrate with services like:
-    // - Nodemailer with SMTP
-    // - SendGrid
-    // - Resend
-    // - Amazon SES
-    // - Postmark
-
-    // Example email content that would be sent
-    const emailContent = `
-      New contact form submission:
-      
-      Name: ${name}
-      Email: ${email}
-      Phone: ${phone}
-      
-      Submitted at: ${new Date().toISOString()}
-    `
-
-    console.log('Email content:', emailContent)
+    // Send email using Resend
+    await resend.emails.send({
+      from: 'contact@neuromonkey.ai', // Replace with your verified domain
+      to: ['sohankulasekara.maker@gmail.com'], // Replace with your email
+      subject: 'New Contact Form Submission - NeuroMonkey.AI',
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Submitted at:</strong> ${new Date().toLocaleString()}</p>
+      `,
+    })
 
     return NextResponse.json(
       { message: 'Contact form submitted successfully' },
@@ -44,7 +37,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error processing contact form:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Failed to send email' },
       { status: 500 }
     )
   }
