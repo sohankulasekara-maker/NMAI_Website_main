@@ -4,31 +4,58 @@ import OneClickIntegrationsIllustration from "./bento/one-click-integrations-ill
 import MCPConnectivityIllustration from "./bento/mcp-connectivity-illustration"
 import EasyDeployment from "./bento/easy-deployment"
 import ParallelCodingAgents from "./bento/parallel-agents"
+import DataSilosIntegration from "./bento/data-silos-integration"
+import CustomerServiceAI from "./bento/customer-service-ai"
+import ConnectApps from "./bento/connect-apps"
 
 const BentoCard = ({ title, description, Component }) => (
-  <div className="overflow-hidden rounded-2xl border border-white/20 flex flex-col justify-start items-start relative">
-    {/* Background with blur effect */}
+  <div
+    className="
+      relative flex flex-col overflow-hidden rounded-2xl border border-white/20
+      bg-transparent
+    "
+  >
+    {/* background layers */}
     <div
-      className="absolute inset-0 rounded-2xl"
+      className="absolute inset-0 rounded-2xl pointer-events-none"
       style={{
         background: "rgba(231, 236, 235, 0.08)",
         backdropFilter: "blur(4px)",
         WebkitBackdropFilter: "blur(4px)",
       }}
     />
-    {/* Additional subtle gradient overlay */}
-    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl" />
+    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl pointer-events-none" />
 
-    <div className="self-stretch p-6 flex flex-col justify-start items-start gap-2 relative z-10">
-      <div className="self-stretch flex flex-col justify-start items-start gap-1.5">
-        <p className="self-stretch text-foreground text-lg font-normal leading-7">
-          {title} <br />
-          <span className="text-muted-foreground">{description}</span>
-        </p>
-      </div>
+    {/* TEXT HOLDER */}
+    <div className="relative z-10 p-6">
+      <h3 className="text-foreground text-lg font-semibold leading-7">
+        {title}
+      </h3>
+
+      {/* clamp text inside the card; scroll if it overflows */}
+      {/* Ellipses if too long */}
+      <p className="
+      mt-2 text-muted-foreground text-md leading-relaxed
+      line-clamp-4  
+    ">
+        {description}
+      </p>
     </div>
-    <div className="self-stretch h-72 relative -mt-0.5 z-10">
-      <Component />
+
+
+    {/* MEDIA HOLDER */}
+    <div className="relative z-10 mt-auto pb-4"> {/* <-- added bottom padding */}
+      {/* fixed visual area so media never pushes past the card */}
+      <div className="relative h-64 md:h-72">
+        <div className="absolute inset-0 flex items-center justify-center p-3">
+          <div className="w-full h-full max-w-full max-h-full">
+            <Component className="w-full h-full object-contain" />
+          </div>
+        </div>
+      </div>
+
+      {/* subtle divider between text and media */}
+      <div className="absolute -top-px inset-x-0 h-px" />
     </div>
   </div>
 )
@@ -68,17 +95,17 @@ export function BentoSection() {
     {
       title: "Data Silos Integration",
       description: "Break down data barriers and create unified, accessible information systems.",
-      Component: AiCodeReviews,
+      Component: DataSilosIntegration,
     },
     {
       title: "Customer Service AI",
       description: "Transform customer support with intelligent automation and personalization.",
-      Component: RealtimeCodingPreviews,
+      Component: CustomerServiceAI,
     },
     {
       title: "Connect Apps",
       description: "Seamlessly integrate and automate workflows across your business applications.",
-      Component: OneClickIntegrationsIllustration,
+      Component: ConnectApps,
     },
   ]
 
@@ -89,7 +116,7 @@ export function BentoSection() {
         <div className="self-stretch py-8 md:py-14 flex flex-col justify-center items-center gap-2 z-10">
           <div className="flex flex-col justify-start items-center gap-4">
             <h2 className="w-full max-w-[655px] text-center text-foreground text-4xl md:text-6xl font-semibold leading-tight md:leading-[66px]">
-              Our AI Services
+              AI Services
             </h2>
             <p className="w-full max-w-[600px] text-center text-muted-foreground text-lg md:text-xl font-medium leading-relaxed">
               Comprehensive AI solutions designed to transform your business operations and drive sustainable growth through intelligent automation.

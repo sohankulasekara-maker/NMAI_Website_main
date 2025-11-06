@@ -21,7 +21,7 @@ export function CTASection() {
             width="850"
             height="493"
           >
-            <rect x="269.215" y="27.4062" width="849.57" height="492.311" fill="url(#paint0_linear_182_1049)" />
+            {/* <rect x="269.215" y="27.4062" width="849.57" height="492.311" fill="url(#paint0_linear_182_1049)" /> */}
           </mask>
           <g mask="url(#mask0_182_1049)">
             <g filter="url(#filter0_f_182_1049)">
