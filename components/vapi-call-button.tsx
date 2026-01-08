@@ -94,7 +94,7 @@ export function VapiCallButton() {
   }
 
   return (
-    <div className="fixed bottom-6 right-4 md:right-6 z-50 flex flex-col items-center gap-2">
+    <div className="fixed bottom-8 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-center gap-2">
       <Button
         onClick={isCallActive ? endCall : startCall}
         disabled={isConnecting}
