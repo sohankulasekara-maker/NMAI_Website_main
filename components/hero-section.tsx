@@ -7,12 +7,6 @@ import { Sparkles } from 'lucide-react'
 export function HeroSection() {
   return (
     <section className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Background Image with Hover Effect */}
-      <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-500 ease-in-out group-hover:scale-105"
-        style={{ backgroundImage: `url('/images/computer-scientist-using-laptop-data-center-updating-ai.jpg')` }}
-      />
-      <div className="absolute inset-0 w-full h-full bg-black/80 group-hover:bg-black/75 transition-colors duration-500" /> {/* Overlay for text readability */}
       
       {/* Animated Background Elements (optional, can be removed if image is dominant) */}
       <div className="absolute inset-0 w-full h-full">

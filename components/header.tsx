@@ -34,15 +34,26 @@ export function Header() {
   ]
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith('/')) {
-      // It's a route navigation, let Next.js handle it
+    if (href.startsWith('/') && !href.includes('#')) {
+      // It's a route navigation without hash, let Next.js handle it
       return
     }
-    e.preventDefault()
-    const targetId = href.substring(1)
-    const targetElement = document.getElementById(targetId)
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: "smooth" })
+
+    // Check if it's a hash link
+    if (href.startsWith('#')) {
+      // If we're not on the home page, navigate to home page with the hash
+      if (window.location.pathname !== '/') {
+        window.location.href = '/' + href
+        return
+      }
+
+      // We're on the home page, so smooth scroll to the section
+      e.preventDefault()
+      const targetId = href.substring(1)
+      const targetElement = document.getElementById(targetId)
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" })
+      }
     }
   }
 

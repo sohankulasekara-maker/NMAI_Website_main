@@ -4,8 +4,8 @@ const testimonials = [
   {
     quote:
       "NeuroMonky.Ai transformed our business operations completely. Their AI automation solutions reduced our processing time by 80% and increased accuracy significantly.",
-    name: "Sarah Johnson",
-    company: "TechCorp Solutions",
+    name: "Sarah",
+    company: "",
     avatar: "/images/avatars/annette-black.png",
     type: "large-teal",
   },
@@ -13,7 +13,7 @@ const testimonials = [
     quote:
       "The team's expertise in machine learning helped us predict customer behavior with 95% accuracy. Game-changing results!",
     name: "Michael Chen",
-    company: "RetailMax",
+    company: "",
     avatar: "/images/avatars/dianne-russell.png",
     type: "small-dark",
   },
@@ -21,15 +21,15 @@ const testimonials = [
     quote:
       "Their AI chatbot solution improved our customer satisfaction scores by 40% while reducing support costs.",
     name: "Emily Rodriguez",
-    company: "ServicePro",
+    company: "",
     avatar: "/images/avatars/cameron-williamson.png",
     type: "small-dark",
   },
   {
     quote:
       "NeuroMonky.Ai's predictive analytics helped us optimize inventory and reduce waste by 30%. Incredible ROI!",
-    name: "David Thompson",
-    company: "LogisticsCorp",
+    name: "David",
+    company: "",
     avatar: "/images/avatars/robert-fox.png",
     type: "small-dark",
   },
@@ -37,7 +37,7 @@ const testimonials = [
     quote:
       "The digital transformation services were exceptional. Our new platform increased sales by 150% in just 6 months.",
     name: "Lisa Wang",
-    company: "E-Commerce Plus",
+    company: "",
     avatar: "/images/avatars/darlene-robertson.png",
     type: "small-dark",
   },
@@ -45,7 +45,7 @@ const testimonials = [
     quote:
       "Professional, innovative, and results-driven. NeuroMonky.Ai delivered beyond our expectations.",
     name: "James Miller",
-    company: "FinanceFlow",
+    company: "",
     avatar: "/images/avatars/cody-fisher.png",
     type: "small-dark",
   },
@@ -53,7 +53,7 @@ const testimonials = [
     quote:
       "From consultation to implementation, NeuroMonky.Ai provided world-class service. Their AI solutions revolutionized our manufacturing process and improved efficiency by 60%.",
     name: "Amanda Foster",
-    company: "Manufacturing Excellence",
+    company: "",
     avatar: "/images/avatars/albert-flores.png",
     type: "large-light",
   },
@@ -74,29 +74,17 @@ const TestimonialCard = ({ quote, name, company, avatar, type }) => {
   const cardWidth = "w-full md:w-[384px]"
 
   if (type === "large-teal") {
-    cardClasses += " bg-primary"
-    quoteClasses += " text-primary-foreground text-2xl font-medium leading-8"
-    nameClasses += " text-primary-foreground text-base font-normal leading-6"
-    companyClasses += " text-primary-foreground/60 text-base font-normal leading-6"
+    cardClasses += " bg-purple-900"
+    quoteClasses += " text-white text-2xl font-medium leading-8"
+    nameClasses += " text-white text-base font-normal leading-6"
+    companyClasses += " text-white/80 text-base font-normal leading-6"
     cardHeight = "h-[502px]"
-    backgroundElements = (
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/large-card-background.svg')", zIndex: 0 }}
-      />
-    )
   } else if (type === "large-light") {
-    cardClasses += " bg-[rgba(231,236,235,0.12)]"
-    quoteClasses += " text-foreground text-2xl font-medium leading-8"
-    nameClasses += " text-foreground text-base font-normal leading-6"
-    companyClasses += " text-muted-foreground text-base font-normal leading-6"
+    cardClasses += " bg-purple-900"
+    quoteClasses += " text-white text-2xl font-medium leading-8"
+    nameClasses += " text-white text-base font-normal leading-6"
+    companyClasses += " text-white/80 text-base font-normal leading-6"
     cardHeight = "h-[502px]"
-    backgroundElements = (
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-20"
-        style={{ backgroundImage: "url('/images/large-card-background.svg')", zIndex: 0 }}
-      />
-    )
   } else {
     cardClasses += " bg-card outline outline-1 outline-border outline-offset-[-1px]"
     quoteClasses += " text-foreground/80 text-[17px] font-normal leading-6"
@@ -120,7 +108,7 @@ const TestimonialCard = ({ quote, name, company, avatar, type }) => {
         />
         <div className="flex flex-col justify-start items-start gap-0.5">
           <div className={nameClasses}>{name}</div>
-          <div className={companyClasses}>{company}</div>
+          {company && <div className={companyClasses}>{company}</div>}
         </div>
       </div>
     </div>
