@@ -32,6 +32,8 @@ export function VapiCallButton() {
 
       vapiInstance.on('call-end', () => {
         console.log('Call ended event received')
+        stopRinging()
+        setIsConnecting(false)
         setIsCallActive(false)
       })
 
