@@ -61,6 +61,15 @@ export function VapiCallButton() {
     }
   }
 
+  const cancelConnection = () => {
+    console.log('Cancelling connection...')
+    stopRinging()
+    setIsConnecting(false)
+    if (vapi) {
+      vapi.stop()
+    }
+  }
+
   const startCall = async () => {
     if (!vapi) {
       console.error('Vapi instance not initialized')
@@ -71,7 +80,19 @@ export function VapiCallButton() {
       console.log('Starting call...')
       setIsConnecting(true)
 
-      // Play ringing sound
+      // Request microphone permission first
+      console.log('Requesting microphone permission...')
+      try {
+        await navigator.mediaDevices.getUserMedia({ audio: true })
+        console.log('Microphone permission granted')
+      } catch (micError) {
+        console.error('Microphone permission denied:', micError)
+        setIsConnecting(false)
+        alert('Microphone permission is required to make a call')
+        return
+      }
+
+      // Play ringing sound after mic permission
       if (audioRef.current) {
         audioRef.current.play().catch(err => {
           console.error('Failed to play ringing sound:', err)
@@ -93,11 +114,20 @@ export function VapiCallButton() {
     vapi.stop()
   }
 
+  const handleButtonClick = () => {
+    if (isCallActive) {
+      endCall()
+    } else if (isConnecting) {
+      cancelConnection()
+    } else {
+      startCall()
+    }
+  }
+
   return (
     <div className="fixed bottom-8 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-center gap-2">
       <Button
-        onClick={isCallActive ? endCall : startCall}
-        disabled={isConnecting}
+        onClick={handleButtonClick}
         className={`rounded-full w-10 h-10 md:w-12 md:h-12 shadow-2xl transition-all duration-300 hover:scale-110 ${
           isCallActive
             ? 'bg-red-500 hover:bg-red-600 animate-pulse'
@@ -107,7 +137,7 @@ export function VapiCallButton() {
         }`}
         size="lg"
       >
-        {isCallActive ? (
+        {isCallActive || isConnecting ? (
           <PhoneOff size={18} className="text-white md:w-5 md:h-5" />
         ) : (
           <Phone size={18} className="text-white md:w-5 md:h-5" />
@@ -120,7 +150,7 @@ export function VapiCallButton() {
           ? 'text-yellow-600'
           : 'text-foreground'
       }`}>
-        {isCallActive ? 'End Call' : isConnecting ? 'Connecting...' : 'Ask Anything'}
+        {isCallActive ? 'End Call' : isConnecting ? 'Cancel' : 'Ask Anything'}
       </span>
     </div>
   )
