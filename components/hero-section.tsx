@@ -22,7 +22,7 @@ export function HeroSection() {
         <div className="w-full text-center space-y-8 max-w-7xl mx-auto px-4">
       {/* Main Heading */}
       <div className="space-y-4">
-        <h1 className="text-5xl md:text-7xl font-bold leading-tight text-white drop-shadow-lg">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white drop-shadow-lg">
           Neuro Monkey{" "}
           <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
             AI
@@ -30,9 +30,9 @@ export function HeroSection() {
           <br />
           Solutions
         </h1>
-        <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
-          Elevate your business with cutting-edge AI technology. We deliver 
-          innovative solutions that drive growth, efficiency, and digital 
+        <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
+          Elevate your business with cutting-edge AI technology. We deliver
+          innovative solutions that drive growth, efficiency, and digital
           transformation.
         </p>
       </div>
