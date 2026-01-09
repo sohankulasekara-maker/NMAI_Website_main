@@ -62,9 +62,9 @@ export function HeroSection() {
                   <div key={i} className="absolute" style={{ transform: `translate3d(${xOffset}px, ${y}px, 0)`, transformStyle: 'preserve-3d' }}>
                     {/* Strand 1 node */}
                     <div
-                      className="absolute w-5 h-5 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+                      className="absolute w-5 h-5 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.4)]"
                       style={{
-                        background: 'rgba(59, 130, 246, 0.3)',
+                        background: 'rgba(168, 85, 247, 0.3)',
                         transform: `translate3d(${x1}px, 0, ${z1}px) translate(-50%, -50%)`,
                         opacity: 0.4 + Math.abs(z1) / radius * 0.2
                       }}
@@ -72,9 +72,9 @@ export function HeroSection() {
 
                     {/* Strand 2 node */}
                     <div
-                      className="absolute w-5 h-5 rounded-full shadow-[0_0_20px_rgba(96,165,250,0.4)]"
+                      className="absolute w-5 h-5 rounded-full shadow-[0_0_20px_rgba(200,130,255,0.4)]"
                       style={{
-                        background: 'rgba(96, 165, 250, 0.3)',
+                        background: 'rgba(200, 130, 255, 0.3)',
                         transform: `translate3d(${x2}px, 0, ${z2}px) translate(-50%, -50%)`,
                         opacity: 0.4 + Math.abs(z2) / radius * 0.2
                       }}
