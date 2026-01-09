@@ -10,25 +10,26 @@ export function HeroSection() {
 
       {/* DNA Helix 3D Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 via-background to-blue-900/5" />
+        {/* Base gradient with blur */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 via-background to-blue-900/5 backdrop-blur-sm" />
 
-        {/* 3D DNA Helix Container */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full" style={{ perspective: '1000px' }}>
+        {/* 3D DNA Helix Container - Spread across screen */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full" style={{ perspective: '2000px' }}>
           <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-dna-rotate-3d" style={{ transformStyle: 'preserve-3d' }}>
-              {/* Generate helix structure */}
-              {Array.from({ length: 20 }).map((_, i) => {
+              {/* Generate helix structure spread horizontally */}
+              {Array.from({ length: 50 }).map((_, i) => {
                 const angle = (i * 36) * (Math.PI / 180); // 36 degrees per step
-                const radius = 150; // Increased by 50%
+                const radius = 200; // Larger radius
                 const x1 = Math.cos(angle) * radius;
                 const z1 = Math.sin(angle) * radius;
                 const x2 = Math.cos(angle + Math.PI) * radius;
                 const z2 = Math.sin(angle + Math.PI) * radius;
-                const y = i * 30 - 300;
+                const y = i * 30 - 750; // Spread vertically
+                const xOffset = (i - 25) * 60; // Spread horizontally to fill screen
 
                 return (
-                  <div key={i} className="absolute" style={{ transform: `translate3d(0, ${y}px, 0)`, transformStyle: 'preserve-3d' }}>
+                  <div key={i} className="absolute" style={{ transform: `translate3d(${xOffset}px, ${y}px, 0)`, transformStyle: 'preserve-3d' }}>
                     {/* Strand 1 node */}
                     <div
                       className="absolute w-4 h-4 rounded-full bg-primary shadow-[0_0_20px_rgba(168,85,247,0.9)]"
