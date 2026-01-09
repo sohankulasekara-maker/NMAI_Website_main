@@ -4,7 +4,7 @@ const testimonials = [
   {
     quote:
       "NeuroMonky.Ai transformed our business operations completely. Their AI automation solutions reduced our processing time by 80% and increased accuracy significantly.",
-    name: "Sarah",
+    name: "Kasun",
     company: "",
     avatar: "/images/avatars/annette-black.png",
     type: "large-teal",
@@ -12,7 +12,7 @@ const testimonials = [
   {
     quote:
       "The team's expertise in machine learning helped us predict customer behavior with 95% accuracy. Game-changing results!",
-    name: "Michael Chen",
+    name: "Pradeep",
     company: "",
     avatar: "/images/avatars/dianne-russell.png",
     type: "small-dark",
@@ -20,7 +20,7 @@ const testimonials = [
   {
     quote:
       "Their AI chatbot solution improved our customer satisfaction scores by 40% while reducing support costs.",
-    name: "Emily Rodriguez",
+    name: "Nimali Silva",
     company: "",
     avatar: "/images/avatars/cameron-williamson.png",
     type: "small-dark",
@@ -28,7 +28,7 @@ const testimonials = [
   {
     quote:
       "NeuroMonky.Ai's predictive analytics helped us optimize inventory and reduce waste by 30%. Incredible ROI!",
-    name: "David",
+    name: "Chamari Jayasinghe",
     company: "",
     avatar: "/images/avatars/robert-fox.png",
     type: "small-dark",
