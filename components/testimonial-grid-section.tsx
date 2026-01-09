@@ -47,7 +47,7 @@ const testimonials = [
 
 const TestimonialCard = ({ quote, name, type }) => {
   const isLargeCard = type.startsWith("large")
-  const avatarSize = 48
+  const avatarSize = 40
   const padding = isLargeCard ? "p-6" : "p-[30px]"
 
   let cardClasses = `flex flex-col justify-between items-start overflow-hidden rounded-[10px] relative ${padding}`
@@ -57,7 +57,7 @@ const TestimonialCard = ({ quote, name, type }) => {
   const cardWidth = "w-full md:w-[384px]"
 
   if (type === "large-purple") {
-    cardClasses += " bg-purple-700"
+    cardClasses += " bg-purple-900"
     quoteClasses += " text-white text-2xl font-medium leading-8"
     nameClasses += " text-white text-base font-normal leading-6"
     cardHeight = "h-[502px]"
@@ -76,7 +76,7 @@ const TestimonialCard = ({ quote, name, type }) => {
           className="rounded-full bg-white flex items-center justify-center"
           style={{ width: avatarSize, height: avatarSize }}
         >
-          <User className="w-6 h-6 text-gray-800" />
+          <User className="w-5 h-5 text-gray-800" />
         </div>
         <div className="flex flex-col justify-start items-start gap-0.5">
           <div className={nameClasses}>{name}</div>
