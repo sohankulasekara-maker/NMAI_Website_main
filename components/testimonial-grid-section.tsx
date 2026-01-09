@@ -1,114 +1,85 @@
-import Image from "next/image"
+import { User } from 'lucide-react'
 
 const testimonials = [
   {
     quote:
-      "NeuroMonky.Ai transformed our business operations completely. Their AI automation solutions reduced our processing time by 80% and increased accuracy significantly.",
+      "Working with them completely transformed how we operate. The AI automation they built saved us so much time and the results are incredibly accurate. Honestly couldn't be happier!",
     name: "Kasun",
-    company: "",
-    avatar: "/images/avatars/annette-black.png",
-    type: "large-teal",
+    type: "large-purple",
   },
   {
     quote:
-      "The team's expertise in machine learning helped us predict customer behavior with 95% accuracy. Game-changing results!",
+      "Their team really knows their stuff when it comes to machine learning. Now we can actually predict what our customers want. Total game changer for us!",
     name: "Pradeep",
-    company: "",
-    avatar: "/images/avatars/dianne-russell.png",
     type: "small-dark",
   },
   {
     quote:
-      "Their AI chatbot solution improved our customer satisfaction scores by 40% while reducing support costs.",
+      "The chatbot they created has been amazing. Our customers are happier and we're spending way less on support. Win-win situation.",
     name: "Nimali Silva",
-    company: "",
-    avatar: "/images/avatars/cameron-williamson.png",
     type: "small-dark",
   },
   {
     quote:
-      "NeuroMonky.Ai's predictive analytics helped us optimize inventory and reduce waste by 30%. Incredible ROI!",
+      "NeuroMonky helped us get our inventory under control with predictive analytics. We're wasting so much less now and the ROI has been incredible.",
     name: "Chamari Jayasinghe",
-    company: "",
-    avatar: "/images/avatars/robert-fox.png",
     type: "small-dark",
   },
   {
     quote:
-      "The digital transformation services were exceptional. Our new platform increased sales by 150% in just 6 months.",
-    name: "Lisa Wang",
-    company: "",
-    avatar: "/images/avatars/darlene-robertson.png",
+      "They built us a new platform and our sales just took off. Best investment we've made in years. The team was great to work with too.",
+    name: "Kleesha",
     type: "small-dark",
   },
   {
     quote:
-      "Professional, innovative, and results-driven. NeuroMonky.Ai delivered beyond our expectations.",
+      "Professional, innovative, and they actually deliver what they promise. These guys exceeded every expectation we had.",
     name: "James Miller",
-    company: "",
-    avatar: "/images/avatars/cody-fisher.png",
     type: "small-dark",
   },
   {
     quote:
-      "From consultation to implementation, NeuroMonky.Ai provided world-class service. Their AI solutions revolutionized our manufacturing process and improved efficiency by 60%.",
+      "From start to finish, NeuroMonky.Ai was incredible. Their AI solutions completely revolutionized our manufacturing process and made everything run so much smoother.",
     name: "Amanda Foster",
-    company: "",
-    avatar: "/images/avatars/albert-flores.png",
-    type: "large-light",
+    type: "large-purple",
   },
 ]
 
-const TestimonialCard = ({ quote, name, company, avatar, type }) => {
+const TestimonialCard = ({ quote, name, type }) => {
   const isLargeCard = type.startsWith("large")
-  const avatarSize = isLargeCard ? 48 : 36
-  const avatarBorderRadius = isLargeCard ? "rounded-[41px]" : "rounded-[30.75px]"
+  const avatarSize = 48
   const padding = isLargeCard ? "p-6" : "p-[30px]"
 
-  let cardClasses = `flex flex-col justify-between items-start overflow-hidden rounded-[10px] shadow-[0px_2px_4px_rgba(0,0,0,0.08)] relative ${padding}`
+  let cardClasses = `flex flex-col justify-between items-start overflow-hidden rounded-[10px] relative ${padding}`
   let quoteClasses = ""
   let nameClasses = ""
-  let companyClasses = ""
-  let backgroundElements = null
   let cardHeight = ""
   const cardWidth = "w-full md:w-[384px]"
 
-  if (type === "large-teal") {
-    cardClasses += " bg-purple-900"
+  if (type === "large-purple") {
+    cardClasses += " bg-purple-700"
     quoteClasses += " text-white text-2xl font-medium leading-8"
     nameClasses += " text-white text-base font-normal leading-6"
-    companyClasses += " text-white/80 text-base font-normal leading-6"
-    cardHeight = "h-[502px]"
-  } else if (type === "large-light") {
-    cardClasses += " bg-purple-900"
-    quoteClasses += " text-white text-2xl font-medium leading-8"
-    nameClasses += " text-white text-base font-normal leading-6"
-    companyClasses += " text-white/80 text-base font-normal leading-6"
     cardHeight = "h-[502px]"
   } else {
-    cardClasses += " bg-card outline outline-1 outline-border outline-offset-[-1px]"
-    quoteClasses += " text-foreground/80 text-[17px] font-normal leading-6"
-    nameClasses += " text-foreground text-sm font-normal leading-[22px]"
-    companyClasses += " text-muted-foreground text-sm font-normal leading-[22px]"
+    cardClasses += " bg-gray-900/50 backdrop-blur-sm border border-gray-800"
+    quoteClasses += " text-gray-200 text-[17px] font-normal leading-6"
+    nameClasses += " text-gray-200 text-sm font-normal leading-[22px]"
     cardHeight = "h-[244px]"
   }
 
   return (
     <div className={`${cardClasses} ${cardWidth} ${cardHeight}`}>
-      {backgroundElements}
       <div className={`relative z-10 font-normal break-words ${quoteClasses}`}>{quote}</div>
       <div className="relative z-10 flex justify-start items-center gap-3">
-        <Image
-          src={avatar || "/placeholder.svg"}
-          alt={`${name} avatar`}
-          width={avatarSize}
-          height={avatarSize}
-          className={`w-${avatarSize / 4} h-${avatarSize / 4} ${avatarBorderRadius}`}
-          style={{ border: "1px solid rgba(255, 255, 255, 0.08)" }}
-        />
+        <div
+          className="rounded-full bg-white flex items-center justify-center"
+          style={{ width: avatarSize, height: avatarSize }}
+        >
+          <User className="w-6 h-6 text-gray-800" />
+        </div>
         <div className="flex flex-col justify-start items-start gap-0.5">
           <div className={nameClasses}>{name}</div>
-          {company && <div className={companyClasses}>{company}</div>}
         </div>
       </div>
     </div>
