@@ -1,10 +1,36 @@
-import React from "react"
+"use client"
+
+import React, { useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Header } from "./header"
 import Link from "next/link"
 import { ChevronDown } from 'lucide-react'
 
 export function HeroSection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const mouseRef = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY }
+
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        const centerX = rect.width / 2
+        const centerY = rect.height / 2
+
+        // Calculate rotation based on mouse position
+        const rotateX = ((e.clientY - rect.top - centerY) / centerY) * 10
+        const rotateY = ((e.clientX - rect.left - centerX) / centerX) * 10
+
+        containerRef.current.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`
+      }
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
   return (
     <section className="min-h-screen flex flex-col relative overflow-hidden">
 
@@ -16,35 +42,41 @@ export function HeroSection() {
         {/* 3D DNA Helix Container - Spread across screen */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full" style={{ perspective: '2000px' }}>
           <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-dna-rotate-3d" style={{ transformStyle: 'preserve-3d' }}>
-              {/* Generate helix structure spread horizontally */}
-              {Array.from({ length: 50 }).map((_, i) => {
+            <div
+              ref={containerRef}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-dna-rotate-3d transition-transform duration-200 ease-out"
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              {/* Generate helix structure spread to fill full screen */}
+              {Array.from({ length: 80 }).map((_, i) => {
                 const angle = (i * 36) * (Math.PI / 180); // 36 degrees per step
-                const radius = 200; // Larger radius
+                const radius = 250; // Larger radius
                 const x1 = Math.cos(angle) * radius;
                 const z1 = Math.sin(angle) * radius;
                 const x2 = Math.cos(angle + Math.PI) * radius;
                 const z2 = Math.sin(angle + Math.PI) * radius;
-                const y = i * 30 - 750; // Spread vertically
-                const xOffset = (i - 25) * 60; // Spread horizontally to fill screen
+                const y = i * 25 - 1000; // Spread vertically to fill full height
+                const xOffset = (i - 40) * 50; // Spread horizontally to fill full width
 
                 return (
                   <div key={i} className="absolute" style={{ transform: `translate3d(${xOffset}px, ${y}px, 0)`, transformStyle: 'preserve-3d' }}>
                     {/* Strand 1 node */}
                     <div
-                      className="absolute w-4 h-4 rounded-full bg-primary shadow-[0_0_20px_rgba(168,85,247,0.9)]"
+                      className="absolute w-5 h-5 rounded-full shadow-[0_0_20px_rgba(59,130,246,0.4)]"
                       style={{
+                        background: 'rgba(59, 130, 246, 0.3)',
                         transform: `translate3d(${x1}px, 0, ${z1}px) translate(-50%, -50%)`,
-                        opacity: 0.6 + Math.abs(z1) / radius * 0.4
+                        opacity: 0.4 + Math.abs(z1) / radius * 0.2
                       }}
                     />
 
                     {/* Strand 2 node */}
                     <div
-                      className="absolute w-4 h-4 rounded-full bg-primary-light shadow-[0_0_20px_rgba(200,130,255,0.9)]"
+                      className="absolute w-5 h-5 rounded-full shadow-[0_0_20px_rgba(96,165,250,0.4)]"
                       style={{
+                        background: 'rgba(96, 165, 250, 0.3)',
                         transform: `translate3d(${x2}px, 0, ${z2}px) translate(-50%, -50%)`,
-                        opacity: 0.6 + Math.abs(z2) / radius * 0.4
+                        opacity: 0.4 + Math.abs(z2) / radius * 0.2
                       }}
                     />
                   </div>
@@ -64,8 +96,8 @@ export function HeroSection() {
       {/* Main Heading */}
       <div className="space-y-4">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white drop-shadow-lg">
-          Neuro Monkey{" "}
-          <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+          <span className="block sm:inline">Neuro Monkey</span>{" "}
+          <span className="block sm:inline bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
             AI Solutions
           </span>
         </h1>
