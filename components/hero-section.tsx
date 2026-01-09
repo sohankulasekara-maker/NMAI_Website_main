@@ -1,58 +1,20 @@
-import React from "react"
+"use client"
+
+import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Header } from "./header"
 import Link from "next/link"
 import { ChevronDown } from 'lucide-react'
+import { GL } from "./gl"
 
 export function HeroSection() {
+  const [hovering, setHovering] = useState(false);
+
   return (
     <section className="min-h-screen flex flex-col relative overflow-hidden">
 
-      {/* DNA Helix 3D Background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        {/* Base gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 via-background to-blue-900/5" />
-
-        {/* 3D DNA Helix Container */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full" style={{ perspective: '1000px' }}>
-          <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-dna-rotate-3d" style={{ transformStyle: 'preserve-3d' }}>
-              {/* Generate helix structure */}
-              {Array.from({ length: 20 }).map((_, i) => {
-                const angle = (i * 36) * (Math.PI / 180); // 36 degrees per step
-                const radius = 150; // Increased by 50%
-                const x1 = Math.cos(angle) * radius;
-                const z1 = Math.sin(angle) * radius;
-                const x2 = Math.cos(angle + Math.PI) * radius;
-                const z2 = Math.sin(angle + Math.PI) * radius;
-                const y = i * 30 - 300;
-
-                return (
-                  <div key={i} className="absolute" style={{ transform: `translate3d(0, ${y}px, 0)`, transformStyle: 'preserve-3d' }}>
-                    {/* Strand 1 node */}
-                    <div
-                      className="absolute w-4 h-4 rounded-full bg-primary shadow-[0_0_20px_rgba(168,85,247,0.9)]"
-                      style={{
-                        transform: `translate3d(${x1}px, 0, ${z1}px) translate(-50%, -50%)`,
-                        opacity: 0.6 + Math.abs(z1) / radius * 0.4
-                      }}
-                    />
-
-                    {/* Strand 2 node */}
-                    <div
-                      className="absolute w-4 h-4 rounded-full bg-primary-light shadow-[0_0_20px_rgba(200,130,255,0.9)]"
-                      style={{
-                        transform: `translate3d(${x2}px, 0, ${z2}px) translate(-50%, -50%)`,
-                        opacity: 0.6 + Math.abs(z2) / radius * 0.4
-                      }}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* WebGL Particle Background */}
+      <GL hovering={hovering} />
 
       {/* Header */}
       <Header />
@@ -78,18 +40,22 @@ export function HeroSection() {
       {/* CTA Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
         <Link href="#ai-services">
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="bg-gradient-to-r from-primary to-primary-light text-primary-foreground hover:opacity-90 px-8 py-4 rounded-full font-semibold text-lg shadow-2xl shadow-primary/25 min-w-[200px]"
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
           >
             Explore AI Solutions →
           </Button>
         </Link>
         <Link href="#digital-services">
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             variant="outline"
             className="border-2 border-primary/50 text-foreground hover:bg-primary/10 px-8 py-4 rounded-full font-semibold text-lg backdrop-blur-md min-w-[200px]"
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
           >
             Explore Digital Solutions →
           </Button>

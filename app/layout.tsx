@@ -26,23 +26,6 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#000000" />
-        {/* Livara ChatBot Widget */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                var script = document.createElement('script');
-                script.src = 'https://gar-inviting-shiner.ngrok-free.app/widget/tw_10_6pc0PyCBWALChr8EqKrji3I_lFzjHp2hF80I5AVzmo8.js';
-                script.async = true;
-                script.onerror = function() {
-                  console.error('Failed to load Livara ChatBot widget. Please check your API key.');
-                };
-                document.head.appendChild(script);
-              })();
-            `,
-          }}
-        />
-        {/* End Livara ChatBot Widget */}
       </head>
       <body className={`${GeistSans.variable} ${GeistMono.variable} font-sans`}>
         {children}

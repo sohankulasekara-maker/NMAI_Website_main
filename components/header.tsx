@@ -72,7 +72,7 @@ export function Header() {
               alt="NeuroMonkey.AI Logo"
               width={56}
               height={56}
-              className="h-14 w-14 relative z-10 hover:scale-105 transition-transform duration-200 scale-x-[-1]"
+              className="h-14 w-14 relative z-10 scale-x-[-1]"
               priority
             />
           </Link>
