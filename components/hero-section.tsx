@@ -2,16 +2,56 @@ import React from "react"
 import { Button } from "@/components/ui/button"
 import { Header } from "./header"
 import Link from "next/link"
-import { Sparkles } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 
 export function HeroSection() {
   return (
     <section className="min-h-screen flex flex-col relative overflow-hidden">
-      
-      {/* Animated Background Elements (optional, can be removed if image is dominant) */}
-      <div className="absolute inset-0 w-full h-full">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+
+      {/* DNA Helix 3D Background */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        {/* Base gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 via-background to-blue-900/5" />
+
+        {/* 3D DNA Helix Container */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full" style={{ perspective: '1000px' }}>
+          <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-dna-rotate-3d" style={{ transformStyle: 'preserve-3d' }}>
+              {/* Generate helix structure */}
+              {Array.from({ length: 20 }).map((_, i) => {
+                const angle = (i * 36) * (Math.PI / 180); // 36 degrees per step
+                const radius = 150; // Increased by 50%
+                const x1 = Math.cos(angle) * radius;
+                const z1 = Math.sin(angle) * radius;
+                const x2 = Math.cos(angle + Math.PI) * radius;
+                const z2 = Math.sin(angle + Math.PI) * radius;
+                const y = i * 30 - 300;
+
+                return (
+                  <div key={i} className="absolute" style={{ transform: `translate3d(0, ${y}px, 0)`, transformStyle: 'preserve-3d' }}>
+                    {/* Strand 1 node */}
+                    <div
+                      className="absolute w-4 h-4 rounded-full bg-primary shadow-[0_0_20px_rgba(168,85,247,0.9)]"
+                      style={{
+                        transform: `translate3d(${x1}px, 0, ${z1}px) translate(-50%, -50%)`,
+                        opacity: 0.6 + Math.abs(z1) / radius * 0.4
+                      }}
+                    />
+
+                    {/* Strand 2 node */}
+                    <div
+                      className="absolute w-4 h-4 rounded-full bg-primary-light shadow-[0_0_20px_rgba(200,130,255,0.9)]"
+                      style={{
+                        transform: `translate3d(${x2}px, 0, ${z2}px) translate(-50%, -50%)`,
+                        opacity: 0.6 + Math.abs(z2) / radius * 0.4
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Header */}
@@ -25,10 +65,8 @@ export function HeroSection() {
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white drop-shadow-lg">
           Neuro Monkey{" "}
           <span className="bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
-            AI
+            AI Solutions
           </span>
-          <br />
-          Solutions
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
           Elevate your business with cutting-edge AI technology. We deliver
@@ -59,6 +97,12 @@ export function HeroSection() {
       </div>
     </div>
   </div>
+
+  {/* Scroll Down Indicator */}
+  <Link href="#ai-services" className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity">
+    <span className="text-sm text-gray-300 font-medium">Scroll</span>
+    <ChevronDown className="w-6 h-6 text-primary animate-bounce" />
+  </Link>
 
   {/* Bottom Gradient Fade */}
   <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
