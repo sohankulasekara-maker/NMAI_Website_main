@@ -9,6 +9,7 @@ export function VapiCallButton() {
   const [isConnecting, setIsConnecting] = useState(false)
   const [vapi, setVapi] = useState<Vapi | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
+  const callCancelledRef = useRef(false)
 
   useEffect(() => {
     // Initialize audio element for ringing sound
@@ -65,6 +66,7 @@ export function VapiCallButton() {
 
   const cancelConnection = () => {
     console.log('Cancelling connection...')
+    callCancelledRef.current = true
     stopRinging()
     setIsConnecting(false)
     if (vapi) {
@@ -80,6 +82,7 @@ export function VapiCallButton() {
 
     try {
       console.log('Starting call...')
+      callCancelledRef.current = false
       setIsConnecting(true)
 
       // Request microphone permission first
@@ -94,6 +97,12 @@ export function VapiCallButton() {
         return
       }
 
+      // Check if cancelled during mic permission
+      if (callCancelledRef.current) {
+        console.log('Call was cancelled during mic permission')
+        return
+      }
+
       // Play ringing sound after mic permission
       if (audioRef.current) {
         audioRef.current.play().catch(err => {
@@ -103,6 +112,14 @@ export function VapiCallButton() {
 
       // Start call with your assistant ID
       await vapi.start('10ed7201-d782-45bd-9796-e43b658387dd')
+
+      // Check if call was cancelled while connecting
+      if (callCancelledRef.current) {
+        console.log('Call was cancelled during connection - stopping immediately')
+        vapi.stop()
+        return
+      }
+
       console.log('Call started successfully')
     } catch (error) {
       console.error('Failed to start call:', error)
