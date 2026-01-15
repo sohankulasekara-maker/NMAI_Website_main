@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/hero-section"
+import { IndustryAISection } from "@/components/industry-ai-section"
 import { BentoSection } from "@/components/bento-section"
 import { DigitalServicesSection } from "@/components/digital-services-section"
 import { TestimonialGridSection } from "@/components/testimonial-grid-section"
@@ -14,6 +15,9 @@ export default function LandingPage() {
         <main className="relative w-full">
           <HeroSection />
         </main>
+        <AnimatedSection id="industry-insights" className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-8" delay={0.1}>
+          <IndustryAISection />
+        </AnimatedSection>
         <AnimatedSection id="ai-services" className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-16" delay={0.2}>
           <BentoSection />
         </AnimatedSection>
