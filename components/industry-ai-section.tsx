@@ -31,6 +31,7 @@ export function IndustryAISection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    e.stopPropagation()
     if (!industry.trim() || isLoading) return
 
     setIsLoading(true)
@@ -92,7 +93,7 @@ export function IndustryAISection() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
               >
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm text-primary font-medium">Powered by AI</span>
+                <span className="text-sm text-primary font-medium">Powered by NeuroMonkey AI</span>
               </motion.div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
@@ -136,7 +137,7 @@ export function IndustryAISection() {
                     type="text"
                     value={industry}
                     onChange={(e) => setIndustry(e.target.value)}
-                    placeholder="e.g., Marketing, Healthcare, Finance..."
+                    placeholder="e.g., Marketing, Finance..."
                     className="w-full px-6 py-4 rounded-xl bg-[rgba(231,236,235,0.08)] border border-white/20 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-lg"
                   />
                 </div>
