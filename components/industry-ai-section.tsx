@@ -180,17 +180,17 @@ export function IndustryAISection() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.2, ease: smoothEase }}
-                className="text-xl text-foreground font-medium mb-2"
+                className="text-lg md:text-xl text-foreground font-medium mb-2"
               >
-                Building your personalized insights...
+                Building personalized insights...
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.3, ease: smoothEase }}
-                className="text-muted-foreground"
+                className="text-sm md:text-base text-muted-foreground"
               >
-                Analyzing AI opportunities in <span className="text-primary font-semibold">{industry}</span>
+                Analyzing AI in <span className="text-primary font-semibold">{industry}</span>
               </motion.p>
             </motion.div>
           )}
@@ -276,7 +276,6 @@ export function IndustryAISection() {
                   className="inline-flex items-center gap-2 mt-4 text-primary hover:text-primary-light transition-colors duration-300 group"
                 >
                   <span className="text-sm font-medium">Based on {result.headlineSource.text} research</span>
-                  <span className="text-sm font-medium">→ Search</span>
                   <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
                 </a>
               </motion.div>
