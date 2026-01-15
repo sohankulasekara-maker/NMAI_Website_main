@@ -18,7 +18,7 @@ export default function ContactPage() {
       {/* Copyright - Very bottom of website */}
       <div className="relative z-10 w-full py-4 border-t border-gray-800 text-center bg-background">
         <p className="text-xs text-gray-500">
-          Copyright © Neuro Monkey 2025
+          Copyright © Neuro Monkey 2026
         </p>
       </div>
     </div>
