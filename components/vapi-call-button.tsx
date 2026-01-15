@@ -204,7 +204,7 @@ export function VapiCallButton() {
             >
               <X size={12} className="text-white" />
             </button>
-            <p className="text-white text-xs font-medium leading-snug pr-1">
+            <p className="text-white text-xs md:text-sm font-medium leading-snug pr-1">
               {tooltipMessage}
             </p>
             {/* Triangle pointer */}
