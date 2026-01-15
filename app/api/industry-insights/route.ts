@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Primary key from env, plus fallback keys for rate limit handling
+// Use API keys from environment variables only (never hardcode keys!)
 const API_KEYS = [
   process.env.GEMINI_API_KEY,
-  'AIzaSyD3ZZxQU6kC2dL0Lm6M4_T2l-q6MBJdB74',
-  'AIzaSyAXXh5ivCAWsNzWJuqRvqNxV9oPdMFJzNA',
-  'AIzaSyC8MLQMOtf3zwJ-fTuJHYTcn9V9pIwQOvg',
-  'AIzaSyB79S9Xb9rTUoctwFoWrG7Uw6GIcALGm9Q',
+  process.env.GEMINI_API_KEY_2,
+  process.env.GEMINI_API_KEY_3,
+  process.env.GEMINI_API_KEY_4,
 ].filter(Boolean) as string[]
 
 async function callGeminiAPI(prompt: string, apiKey: string) {
