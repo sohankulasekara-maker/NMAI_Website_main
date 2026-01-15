@@ -61,20 +61,37 @@ export function VapiCallButton() {
     }
   }, [])
 
-  // Progressive tooltip animation
+  // Progressive tooltip animation with rotating questions
   useEffect(() => {
     if (tooltipDismissed || isCallActive || isConnecting) return
 
+    const sampleQuestions = [
+      'How can NeuroMonkey help your business?',
+      'What AI solutions do you offer?',
+      'Tell me about your voice AI technology',
+      'How much does it cost to get started?',
+    ]
+    let questionIndex = 0
+
     // First message after 2 seconds
     const timer1 = setTimeout(() => {
-      setTooltipMessage('👋 Hi there!')
+      setTooltipMessage('👋 Hey! Ask me anything about NeuroMonkey')
       setShowTooltip(true)
     }, 2000)
 
-    // Second message after 4 seconds total
+    // Start rotating questions after 5 seconds
     const timer2 = setTimeout(() => {
-      setTooltipMessage('Ask me anything about our AI solutions!')
-    }, 4000)
+      setTooltipMessage(sampleQuestions[0])
+      questionIndex = 1
+
+      // Rotate through questions every 4 seconds
+      const interval = setInterval(() => {
+        setTooltipMessage(sampleQuestions[questionIndex])
+        questionIndex = (questionIndex + 1) % sampleQuestions.length
+      }, 4000)
+
+      return () => clearInterval(interval)
+    }, 5000)
 
     return () => {
       clearTimeout(timer1)
@@ -179,19 +196,19 @@ export function VapiCallButton() {
       {/* Animated Tooltip Bubble */}
       {showTooltip && !isCallActive && !isConnecting && (
         <div className="relative animate-in slide-in-from-right-5 fade-in duration-500 mb-2">
-          <div className="relative bg-gradient-to-r from-primary to-primary-light rounded-2xl px-4 py-3 shadow-2xl max-w-[240px] md:max-w-[280px] animate-bounce-subtle">
+          <div className="relative bg-gradient-to-r from-primary to-primary-light rounded-xl px-3 py-2 shadow-2xl max-w-[200px] md:max-w-[220px] animate-bounce-subtle">
             <button
               onClick={dismissTooltip}
-              className="absolute -top-2 -right-2 w-6 h-6 bg-gray-900 hover:bg-gray-800 rounded-full flex items-center justify-center transition-colors shadow-lg"
+              className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-gray-900 hover:bg-gray-800 rounded-full flex items-center justify-center transition-colors shadow-lg"
               aria-label="Dismiss"
             >
-              <X size={14} className="text-white" />
+              <X size={12} className="text-white" />
             </button>
-            <p className="text-white text-sm md:text-base font-medium leading-snug pr-2">
+            <p className="text-white text-xs md:text-sm font-medium leading-snug pr-1">
               {tooltipMessage}
             </p>
             {/* Triangle pointer */}
-            <div className="absolute -bottom-2 right-8 w-4 h-4 bg-primary-light rotate-45"></div>
+            <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-primary-light rotate-45"></div>
           </div>
         </div>
       )}

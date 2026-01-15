@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Header } from "./header"
 import Link from "next/link"
@@ -9,6 +9,11 @@ import { ChevronDown } from 'lucide-react'
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const mouseRef = useRef({ x: 0, y: 0 })
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -40,15 +45,16 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 via-background to-blue-900/5 backdrop-blur-sm" />
 
         {/* 3D DNA Helix Container - Spread across screen */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full" style={{ perspective: '2000px' }}>
-          <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
-            <div
-              ref={containerRef}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-dna-rotate-3d transition-transform duration-200 ease-out"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              {/* Generate helix structure spread to fill full screen */}
-              {Array.from({ length: 80 }).map((_, i) => {
+        {isMounted && (
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full" style={{ perspective: '2000px' }}>
+            <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+              <div
+                ref={containerRef}
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-dna-rotate-3d transition-transform duration-200 ease-out"
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                {/* Generate helix structure spread to fill full screen */}
+                {Array.from({ length: 80 }).map((_, i) => {
                 const angle = (i * 36) * (Math.PI / 180); // 36 degrees per step
                 const radius = 250; // Larger radius
                 const x1 = Math.cos(angle) * radius;
@@ -82,9 +88,10 @@ export function HeroSection() {
                   </div>
                 );
               })}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Header */}
