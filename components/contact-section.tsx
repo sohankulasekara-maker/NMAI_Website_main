@@ -63,7 +63,7 @@ export function ContactSection() {
             message: ""
           })
           setIsSubmitted(false)
-        }, 10000)
+        }, 15000)
       } else {
         console.error('Failed to submit form')
         // You might want to show an error message to the user here
@@ -90,12 +90,14 @@ export function ContactSection() {
 
         <div className="flex justify-center">
           <Card className="w-full max-w-md bg-white/5 border-white/10 backdrop-blur-sm">
-            <CardHeader className="text-center">
-              <CardTitle className="text-2xl font-bold text-white">Contact Us</CardTitle>
-              <CardDescription className="text-gray-400">
-                Fill out the form below and we'll get back to you within 24 hours.
-              </CardDescription>
-            </CardHeader>
+            {!isSubmitted && (
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl font-bold text-white">Contact Us</CardTitle>
+                <CardDescription className="text-gray-400">
+                  Fill out the form below and we'll get back to you within 24 hours.
+                </CardDescription>
+              </CardHeader>
+            )}
             <CardContent>
               {isSubmitted ? (
                 <div className="text-center py-8 px-4">
