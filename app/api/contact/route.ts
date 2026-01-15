@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     // Send email using Resend
     await resend.emails.send({
       from: 'contact@neuromonkey.ai', // Replace with your verified domain
-      to: ['sohankulasekara.maker@gmail.com'], // Replace with your email
+      to: ['Neuromonkey.ai@gmail.com'],
       subject: 'New Contact Form Submission - NeuroMonkey.AI',
       html: `
         <h2>New Contact Form Submission</h2>
