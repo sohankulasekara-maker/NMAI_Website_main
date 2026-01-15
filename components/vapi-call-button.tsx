@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Vapi from '@vapi-ai/web'
 import { Button } from '@/components/ui/button'
-import { Phone, PhoneOff } from 'lucide-react'
+import { Phone, PhoneOff, X } from 'lucide-react'
 
 export function VapiCallButton() {
   const [isCallActive, setIsCallActive] = useState(false)
@@ -10,6 +10,9 @@ export function VapiCallButton() {
   const [vapi, setVapi] = useState<Vapi | null>(null)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const callCancelledRef = useRef(false)
+  const [showTooltip, setShowTooltip] = useState(false)
+  const [tooltipMessage, setTooltipMessage] = useState('')
+  const [tooltipDismissed, setTooltipDismissed] = useState(false)
 
   useEffect(() => {
     // Initialize audio element for ringing sound
@@ -29,6 +32,7 @@ export function VapiCallButton() {
         stopRinging()
         setIsConnecting(false)
         setIsCallActive(true)
+        setShowTooltip(false) // Hide tooltip during call
       })
 
       vapiInstance.on('call-end', () => {
@@ -56,6 +60,27 @@ export function VapiCallButton() {
       console.error('Failed to initialize Vapi:', error)
     }
   }, [])
+
+  // Progressive tooltip animation
+  useEffect(() => {
+    if (tooltipDismissed || isCallActive || isConnecting) return
+
+    // First message after 2 seconds
+    const timer1 = setTimeout(() => {
+      setTooltipMessage('👋 Hi there!')
+      setShowTooltip(true)
+    }, 2000)
+
+    // Second message after 4 seconds total
+    const timer2 = setTimeout(() => {
+      setTooltipMessage('Ask me anything about our AI solutions!')
+    }, 4000)
+
+    return () => {
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+    }
+  }, [tooltipDismissed, isCallActive, isConnecting])
 
   const stopRinging = () => {
     if (audioRef.current) {
@@ -134,6 +159,7 @@ export function VapiCallButton() {
   }
 
   const handleButtonClick = () => {
+    setShowTooltip(false) // Hide tooltip when button is clicked
     if (isCallActive) {
       endCall()
     } else if (isConnecting) {
@@ -143,34 +169,61 @@ export function VapiCallButton() {
     }
   }
 
+  const dismissTooltip = () => {
+    setShowTooltip(false)
+    setTooltipDismissed(true)
+  }
+
   return (
-    <div className="fixed bottom-8 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-center gap-2">
-      <Button
-        onClick={handleButtonClick}
-        className={`rounded-full w-10 h-10 md:w-12 md:h-12 shadow-2xl transition-all duration-300 hover:scale-110 ${
+    <div className="fixed bottom-8 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-2">
+      {/* Animated Tooltip Bubble */}
+      {showTooltip && !isCallActive && !isConnecting && (
+        <div className="relative animate-in slide-in-from-right-5 fade-in duration-500 mb-2">
+          <div className="relative bg-gradient-to-r from-primary to-primary-light rounded-2xl px-4 py-3 shadow-2xl max-w-[240px] md:max-w-[280px] animate-bounce-subtle">
+            <button
+              onClick={dismissTooltip}
+              className="absolute -top-2 -right-2 w-6 h-6 bg-gray-900 hover:bg-gray-800 rounded-full flex items-center justify-center transition-colors shadow-lg"
+              aria-label="Dismiss"
+            >
+              <X size={14} className="text-white" />
+            </button>
+            <p className="text-white text-sm md:text-base font-medium leading-snug pr-2">
+              {tooltipMessage}
+            </p>
+            {/* Triangle pointer */}
+            <div className="absolute -bottom-2 right-8 w-4 h-4 bg-primary-light rotate-45"></div>
+          </div>
+        </div>
+      )}
+
+      <div className="flex flex-col items-center gap-2">
+        <Button
+          onClick={handleButtonClick}
+          className={`rounded-full w-10 h-10 md:w-12 md:h-12 shadow-2xl transition-all duration-300 hover:scale-110 ${
+            isCallActive
+              ? 'bg-red-500 hover:bg-red-600 animate-pulse'
+              : isConnecting
+              ? 'bg-yellow-500 hover:bg-yellow-600 animate-pulse'
+              : 'bg-gradient-to-r from-primary to-primary-light hover:opacity-90 animate-glow'
+          }`}
+          size="lg"
+        >
+          {isCallActive || isConnecting ? (
+            <PhoneOff size={18} className="text-white md:w-5 md:h-5" />
+          ) : (
+            <Phone size={18} className="text-white md:w-5 md:h-5" />
+          )}
+        </Button>
+        <span className={`text-xs md:text-sm font-medium whitespace-nowrap transition-all duration-300 ${
           isCallActive
-            ? 'bg-red-500 hover:bg-red-600 animate-pulse'
+            ? 'text-red-600'
             : isConnecting
-            ? 'bg-yellow-500 hover:bg-yellow-600 animate-pulse'
-            : 'bg-gradient-to-r from-primary to-primary-light hover:opacity-90 animate-glow'
-        }`}
-        size="lg"
-      >
-        {isCallActive || isConnecting ? (
-          <PhoneOff size={18} className="text-white md:w-5 md:h-5" />
-        ) : (
-          <Phone size={18} className="text-white md:w-5 md:h-5" />
-        )}
-      </Button>
-      <span className={`text-xs md:text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-        isCallActive
-          ? 'text-red-600'
-          : isConnecting
-          ? 'text-yellow-600'
-          : 'text-foreground'
-      }`}>
-        {isCallActive ? 'End Call' : isConnecting ? 'Cancel' : 'Ask Anything'}
-      </span>
+            ? 'text-yellow-600'
+            : 'text-foreground'
+        }`}>
+          {isCallActive ? 'End Call' : isConnecting ? 'Cancel' : 'Ask Anything'}
+        </span>
+      </div>
     </div>
   )
 }

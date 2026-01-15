@@ -123,4 +123,18 @@
     animation: dnaRotate3D 52s linear infinite;
     transform-style: preserve-3d;
   }
+
+  /* Subtle bounce animation for tooltip */
+  @keyframes bounceSubtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSubtle 2s ease-in-out infinite;
+  }
 }
