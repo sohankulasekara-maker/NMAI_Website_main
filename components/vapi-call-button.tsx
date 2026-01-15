@@ -75,11 +75,11 @@ export function VapiCallButton() {
 
     // First message after 2 seconds
     const timer1 = setTimeout(() => {
-      setTooltipMessage('👋 Hey! Ask me anything about NeuroMonkey')
+      setTooltipMessage('👋 Hey! Try our Voice AI assistant to learn about NeuroMonkey')
       setShowTooltip(true)
     }, 2000)
 
-    // Start rotating questions after 5 seconds
+    // Start rotating questions after 6 seconds (shows first message for 4 seconds)
     const timer2 = setTimeout(() => {
       setTooltipMessage(sampleQuestions[0])
       questionIndex = 1
@@ -91,7 +91,7 @@ export function VapiCallButton() {
       }, 4000)
 
       return () => clearInterval(interval)
-    }, 5000)
+    }, 6000)
 
     return () => {
       clearTimeout(timer1)
