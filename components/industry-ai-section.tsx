@@ -276,7 +276,7 @@ export function IndustryAISection() {
                   className="inline-flex items-center gap-2 mt-4 text-primary hover:text-primary-light transition-colors duration-300 group"
                 >
                   <span className="text-sm font-medium">Based on {result.headlineSource.text} research</span>
-                  <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
               </motion.div>
 
