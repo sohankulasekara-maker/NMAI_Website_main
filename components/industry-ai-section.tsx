@@ -92,7 +92,7 @@ export function IndustryAISection() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
               >
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm text-primary font-medium">AI-Powered Insights</span>
+                <span className="text-sm text-primary font-medium">Powered by AI</span>
               </motion.div>
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
