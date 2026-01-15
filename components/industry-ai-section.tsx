@@ -144,7 +144,7 @@ export function IndustryAISection() {
                 <button
                   type="submit"
                   disabled={!industry.trim()}
-                  className="px-8 py-4 rounded-xl bg-primary hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold flex items-center justify-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                  className="px-8 py-4 rounded-full bg-gradient-to-r from-primary to-primary-light hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-2xl shadow-primary/25"
                 >
                   <span>Discover</span>
                   <ArrowRight className="w-5 h-5" />
@@ -210,7 +210,7 @@ export function IndustryAISection() {
               <p className="text-red-400 mb-4">{error}</p>
               <button
                 onClick={handleReset}
-                className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-foreground transition-all duration-300"
+                className="px-8 py-4 rounded-full border-2 border-primary/50 text-foreground hover:bg-primary/10 font-semibold transition-all duration-300 backdrop-blur-md"
               >
                 Try Again
               </button>
@@ -310,14 +310,14 @@ export function IndustryAISection() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-primary hover:bg-primary-dark text-white font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-primary-light hover:opacity-90 text-white font-semibold transition-all duration-300 shadow-2xl shadow-primary/25 min-w-[200px]"
                   >
                     <span>Book a Free Consultation</span>
                     <ArrowRight className="w-5 h-5" />
                   </Link>
                   <button
                     onClick={handleReset}
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-foreground font-semibold transition-all duration-300"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border-2 border-primary/50 text-foreground hover:bg-primary/10 font-semibold transition-all duration-300 backdrop-blur-md min-w-[200px]"
                   >
                     Try Another Industry
                   </button>
