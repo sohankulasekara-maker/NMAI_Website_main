@@ -13,6 +13,7 @@ export function VapiCallButton() {
   const [showTooltip, setShowTooltip] = useState(false)
   const [tooltipMessage, setTooltipMessage] = useState('')
   const [tooltipDismissed, setTooltipDismissed] = useState(false)
+  const [messageKey, setMessageKey] = useState(0)
 
   useEffect(() => {
     // Initialize audio element for ringing sound
@@ -76,17 +77,20 @@ export function VapiCallButton() {
     // First message after 2 seconds
     const timer1 = setTimeout(() => {
       setTooltipMessage('👋 Hey! Try our Voice AI assistant to learn about NeuroMonkey')
+      setMessageKey(prev => prev + 1)
       setShowTooltip(true)
     }, 2000)
 
     // Start rotating questions after 7 seconds (shows first message for 5 seconds)
     const timer2 = setTimeout(() => {
       setTooltipMessage(sampleQuestions[0])
+      setMessageKey(prev => prev + 1)
       questionIndex = 1
 
       // Rotate through questions every 4 seconds
       const interval = setInterval(() => {
         setTooltipMessage(sampleQuestions[questionIndex])
+        setMessageKey(prev => prev + 1)
         questionIndex = (questionIndex + 1) % sampleQuestions.length
       }, 4000)
 
@@ -204,7 +208,10 @@ export function VapiCallButton() {
             >
               <X size={12} className="text-white" />
             </button>
-            <p className="text-white text-xs md:text-sm font-medium leading-snug pr-1">
+            <p
+              key={messageKey}
+              className="text-white text-xs md:text-sm font-medium leading-snug pr-1 animate-fade-in"
+            >
               {tooltipMessage}
             </p>
             {/* Triangle pointer */}
