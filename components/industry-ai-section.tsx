@@ -71,7 +71,7 @@ export function IndustryAISection() {
   return (
     <section className="w-full py-16 md:py-24 px-5 relative flex flex-col justify-center items-center overflow-hidden">
       {/* Background blur effect */}
-      <div className="absolute w-[400px] h-[600px] bg-primary/15 blur-[120px] z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute w-[400px] h-[600px] bg-primary/15 blur-[60px] md:blur-[120px] z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform" style={{ backfaceVisibility: 'hidden', transform: 'translateZ(0) translate(-50%, -50%)' }} />
 
       <div className="w-full max-w-3xl relative z-10">
         {/* Header - Only show when no results and not loading */}
