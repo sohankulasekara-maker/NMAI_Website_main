@@ -1,4 +1,5 @@
 import { Header } from "@/components/header"
+import { FooterSection } from "@/components/footer-section"
 
 export const metadata = {
   title: 'Terms of Use - Neuro Monkey',
@@ -81,14 +82,14 @@ export default function TermsPage() {
               </section>
             </div>
           </div>
-          
-          {/* Copyright notice */}
-          <div className="mt-16 pt-8 border-t border-gray-800 text-center">
-            <p className="text-sm text-gray-500">
-              Copyright © Neuro Monkey 2025
-            </p>
-          </div>
         </div>
+      </div>
+      <FooterSection />
+      {/* Copyright notice */}
+      <div className="relative z-10 w-full py-4 border-t border-gray-800 text-center bg-background">
+        <p className="text-xs text-gray-500">
+          Copyright © Neuro Monkey 2025
+        </p>
       </div>
     </div>
   )

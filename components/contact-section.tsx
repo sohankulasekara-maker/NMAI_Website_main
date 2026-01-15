@@ -4,19 +4,32 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: ""
+    companyName: "",
+    countryCode: "+94",
+    phone: "",
+    serviceInterest: "",
+    message: ""
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSelectChange = (name: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -40,9 +53,17 @@ export function ContactSection() {
         setIsSubmitted(true)
         // Reset form after successful submission
         setTimeout(() => {
-          setFormData({ name: "", email: "", phone: "" })
+          setFormData({
+            name: "",
+            email: "",
+            companyName: "",
+            countryCode: "+94",
+            phone: "",
+            serviceInterest: "",
+            message: ""
+          })
           setIsSubmitted(false)
-        }, 3000)
+        }, 10000)
       } else {
         console.error('Failed to submit form')
         // You might want to show an error message to the user here
@@ -77,14 +98,19 @@ export function ContactSection() {
             </CardHeader>
             <CardContent>
               {isSubmitted ? (
-                <div className="text-center py-8">
+                <div className="text-center py-8 px-4">
                   <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">Thank You!</h3>
-                  <p className="text-gray-400">Your message has been sent successfully. We'll get back to you soon!</p>
+                  <h3 className="text-2xl font-bold text-white mb-3">Message Received!</h3>
+                  <p className="text-gray-300 mb-4">
+                    Thank you for reaching out to NeuroMonkey.AI. Our team has received your inquiry and will review it shortly.
+                  </p>
+                  <p className="text-gray-400 text-sm">
+                    We typically respond within 24 hours during business days. If your matter is urgent, please feel free to call us directly.
+                  </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -117,16 +143,80 @@ export function ContactSection() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-white">Phone Number *</Label>
+                    <Label htmlFor="companyName" className="text-white">Company Name</Label>
                     <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
+                      id="companyName"
+                      name="companyName"
+                      type="text"
+                      value={formData.companyName}
+                      onChange={handleInputChange}
+                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
+                      placeholder="Enter your company name (optional)"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-white">Phone Number *</Label>
+                    <div className="flex gap-2">
+                      <Select
+                        value={formData.countryCode}
+                        onValueChange={(value) => handleSelectChange("countryCode", value)}
+                      >
+                        <SelectTrigger className="w-[110px] bg-white/5 border-white/10 text-white focus:border-primary focus:ring-primary">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="+94">🇱🇰 +94</SelectItem>
+                          <SelectItem value="+1">🇺🇸 +1</SelectItem>
+                          <SelectItem value="+44">🇬🇧 +44</SelectItem>
+                          <SelectItem value="+91">🇮🇳 +91</SelectItem>
+                          <SelectItem value="+61">🇦🇺 +61</SelectItem>
+                          <SelectItem value="+971">🇦🇪 +971</SelectItem>
+                          <SelectItem value="+974">🇶🇦 +974</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        required
+                        className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
+                        placeholder="Enter your phone number"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="serviceInterest" className="text-white">Service Interest *</Label>
+                    <Select
+                      value={formData.serviceInterest}
+                      onValueChange={(value) => handleSelectChange("serviceInterest", value)}
+                      required
+                    >
+                      <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-primary focus:ring-primary">
+                        <SelectValue placeholder="Select a service" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="ai-solutions">AI Solutions</SelectItem>
+                        <SelectItem value="digital-solutions">Digital Solutions</SelectItem>
+                        <SelectItem value="consultation">Consultation</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="message" className="text-white">Message / Requirements *</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
                       onChange={handleInputChange}
                       required
-                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                      placeholder="Enter your phone number"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary min-h-[120px]"
+                      placeholder="Tell us about your project or requirements..."
                     />
                   </div>
 
