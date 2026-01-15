@@ -70,7 +70,7 @@ export function VapiCallButton() {
       'How can NeuroMonkey help your business?',
       'What AI solutions do you offer?',
       'Tell me about your voice AI technology',
-      'How much does it cost to get started?',
+      'Can you integrate AI with my existing systems?',
     ]
     let questionIndex = 0
 
