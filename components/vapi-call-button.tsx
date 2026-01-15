@@ -79,7 +79,7 @@ export function VapiCallButton() {
       setShowTooltip(true)
     }, 2000)
 
-    // Start rotating questions after 6 seconds (shows first message for 4 seconds)
+    // Start rotating questions after 7 seconds (shows first message for 5 seconds)
     const timer2 = setTimeout(() => {
       setTooltipMessage(sampleQuestions[0])
       questionIndex = 1
@@ -91,7 +91,7 @@ export function VapiCallButton() {
       }, 4000)
 
       return () => clearInterval(interval)
-    }, 6000)
+    }, 7000)
 
     return () => {
       clearTimeout(timer1)
@@ -204,7 +204,7 @@ export function VapiCallButton() {
             >
               <X size={12} className="text-white" />
             </button>
-            <p className="text-white text-xs md:text-sm font-medium leading-snug pr-1">
+            <p className="text-white text-xs font-medium leading-snug pr-1">
               {tooltipMessage}
             </p>
             {/* Triangle pointer */}
