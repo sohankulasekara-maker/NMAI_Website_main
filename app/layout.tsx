@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import SmoothScroll from "@/components/SmoothScroll";
+import { VapiCallButton } from "@/components/vapi-call-button";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -27,6 +28,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-black text-white">
         <SmoothScroll>{children}</SmoothScroll>
+        <VapiCallButton />
       </body>
     </html>
   );
