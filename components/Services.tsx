@@ -11,10 +11,10 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-black py-24">
-      <div className="max-w-6xl mx-auto px-8 md:px-16">
+    <section id="services" className="bg-black py-20 md:py-24">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-16">
         <RevealOnScroll>
-          <h2 className="text-[2.5rem] md:text-[4rem] font-bold leading-[0.92] tracking-[-0.02em] mb-20">
+          <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[4rem] font-bold leading-[0.95] md:leading-[0.92] tracking-[-0.02em] mb-12 md:mb-20">
             Here&apos;s what we<br />actually do.
           </h2>
         </RevealOnScroll>
@@ -22,9 +22,9 @@ export default function Services() {
         <div className="grid md:grid-cols-2 gap-px bg-white/5">
           {SERVICES.map(({ title, description, tag }, i) => (
             <RevealOnScroll key={tag} delay={i * 0.08}>
-              <div className="bg-black p-8 md:p-10 hover:bg-white/[0.02] transition-colors duration-500 group">
-                <span className="text-[10px] uppercase tracking-[0.3em] text-white/60 mb-4 block">{tag}</span>
-                <h3 className="text-lg font-bold text-white mb-3 leading-snug group-hover:text-white/90">{title}</h3>
+              <div className="bg-black p-6 sm:p-8 md:p-10 hover:bg-white/[0.02] transition-colors duration-500 group h-full">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-white/60 mb-3 md:mb-4 block">{tag}</span>
+                <h3 className="text-base sm:text-lg font-bold text-white mb-2 md:mb-3 leading-snug group-hover:text-white/90">{title}</h3>
                 <p className="text-sm text-white/60 leading-relaxed">{description}</p>
               </div>
             </RevealOnScroll>

@@ -196,10 +196,10 @@ export function VapiCallButton() {
   }
 
   return (
-    <div className="fixed bottom-8 right-6 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-2">
-      {/* Animated Tooltip Bubble */}
+    <div className="fixed bottom-6 right-4 md:bottom-8 md:right-8 z-50 flex flex-col items-end gap-2">
+      {/* Animated Tooltip Bubble — hidden below sm so it doesn't eat half the mobile viewport */}
       {showTooltip && !isCallActive && !isConnecting && (
-        <div className="relative animate-in slide-in-from-right-5 fade-in duration-500 mb-2">
+        <div className="relative animate-in slide-in-from-right-5 fade-in duration-500 mb-2 hidden sm:block">
           <div className="relative bg-gradient-to-r from-primary to-primary-light rounded-xl px-3 py-2 shadow-2xl max-w-[200px] md:max-w-[220px] animate-bounce-subtle">
             <button
               onClick={dismissTooltip}
@@ -238,7 +238,7 @@ export function VapiCallButton() {
             <Phone size={18} className="text-white md:w-5 md:h-5" />
           )}
         </Button>
-        <span className={`text-xs md:text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+        <span className={`text-[10px] md:text-sm font-medium whitespace-nowrap transition-all duration-300 ${
           isCallActive
             ? 'text-red-600'
             : isConnecting

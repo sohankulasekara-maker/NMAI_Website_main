@@ -2,10 +2,10 @@ import RevealOnScroll from "./RevealOnScroll";
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="bg-black py-24 border-t border-white/10">
-      <div className="max-w-6xl mx-auto px-8 md:px-16">
+    <section id="testimonials" className="bg-black py-20 md:py-24 border-t border-white/10">
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-16">
         <RevealOnScroll>
-          <h2 className="text-[2.5rem] md:text-[4rem] font-bold leading-[0.92] tracking-[-0.02em] mb-20">
+          <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[4rem] font-bold leading-[0.95] md:leading-[0.92] tracking-[-0.02em] mb-12 md:mb-20">
             Don&apos;t take our<br />word for it.
           </h2>
         </RevealOnScroll>
@@ -13,11 +13,11 @@ export default function Testimonials() {
         <div className="grid md:grid-cols-3 gap-px bg-white/5">
           {/* Featured */}
           <RevealOnScroll className="md:col-span-2">
-            <div className="bg-black p-8 md:p-12 h-full flex flex-col justify-between">
-              <p className="text-xl md:text-2xl text-white/70 leading-relaxed font-light">
+            <div className="bg-black p-6 sm:p-8 md:p-12 h-full flex flex-col justify-between gap-6">
+              <p className="text-base sm:text-xl md:text-2xl text-white/70 leading-relaxed font-light">
                 &ldquo;We had 3 people doing data entry. Now we have zero. The chatbot handles client intake, the AI sorts invoices, and I get a WhatsApp summary every morning. Genuinely changed how we operate.&rdquo;
               </p>
-              <div className="mt-8">
+              <div>
                 <p className="font-semibold text-white text-sm">Ravindu Perera</p>
                 <p className="text-[10px] text-white/50">CEO, Lanka Digital Solutions</p>
               </div>

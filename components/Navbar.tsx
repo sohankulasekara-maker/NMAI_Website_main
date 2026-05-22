@@ -29,19 +29,20 @@ export default function Navbar() {
   return (
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-black/90 backdrop-blur-md" : "bg-transparent"}`}>
-        <div className="w-full px-8 md:px-16 h-[70px] flex items-center justify-between">
-          <a href="/">
-            <Image src="/logo.png" alt="NeuroMonkey AI" width={75} height={22} style={{ objectFit: "contain" }} />
+        <div className="w-full px-6 sm:px-8 md:px-16 h-[64px] md:h-[70px] flex items-center justify-between">
+          <a href="/" className="shrink-0">
+            <Image src="/logo.png" alt="NeuroMonkey AI" width={75} height={22} style={{ objectFit: "contain" }} priority />
           </a>
 
           <button
             onClick={() => setOpen(true)}
-            className="flex items-center gap-3 text-white/60 hover:text-white transition-colors"
+            aria-label="Open menu"
+            className="flex items-center gap-3 text-white/80 hover:text-white transition-colors -mr-2 px-2 py-2"
           >
-            <span className="text-[11px] uppercase tracking-[0.3em] hidden md:inline">Menu</span>
-            <div className="flex flex-col gap-1.5 w-6">
-              <div className="h-px bg-current" />
-              <div className="h-px bg-current w-4 ml-auto" />
+            <span className="text-[11px] uppercase tracking-[0.25em] sm:tracking-[0.3em]">Menu</span>
+            <div className="flex flex-col gap-[5px] w-5 sm:w-6">
+              <div className="h-[1.5px] bg-current" />
+              <div className="h-[1.5px] bg-current w-3 sm:w-4 ml-auto" />
             </div>
           </button>
         </div>

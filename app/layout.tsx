@@ -12,6 +12,13 @@ export const metadata: Metadata = {
     "We build intelligent automation systems that save you time, money, and headcount. AI-powered solutions for sales, marketing, customer service, and operations.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#000000",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -26,7 +33,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#000000" />
       </head>
-      <body className="min-h-screen bg-black text-white">
+      <body className="min-h-screen bg-black text-white overflow-x-hidden">
         <SmoothScroll>{children}</SmoothScroll>
         <VapiCallButton />
       </body>

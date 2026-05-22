@@ -3,10 +3,10 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black">
-      <div className="max-w-6xl mx-auto px-8 md:px-16 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
-            <Image src="/logo.png" alt="NeuroMonkey AI" width={80} height={24} className="mb-4" style={{ objectFit: "contain" }} />
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-16 py-10 md:py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="col-span-2">
+            <Image src="/logo.png" alt="NeuroMonkey AI" width={80} height={24} className="mb-4 h-auto w-auto" style={{ objectFit: "contain" }} />
             <p className="text-[11px] text-white/60 leading-relaxed max-w-xs">
               Smart Automation for Modern Businesses. We build AI systems that save time, reduce costs, and scale your operations.
             </p>
@@ -31,7 +31,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/5 mt-12 pt-6 flex items-center justify-between">
+        <div className="border-t border-white/5 mt-10 md:mt-12 pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="text-[10px] text-white/10">&copy; 2026 NeuroMonkey AI</p>
           <div className="flex gap-4">
             {["Instagram", "LinkedIn"].map(s => (
