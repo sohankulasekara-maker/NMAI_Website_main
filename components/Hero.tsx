@@ -31,10 +31,10 @@ export default function Hero() {
         }}
       />
 
-      {/* Yakira — mobile: vertically centered; desktop: bottom side composition.
-          Outer div handles centering on mobile (Tailwind -translate-y-1/2),
-          inner div handles the inline parallax/opacity so they don't collide. */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 md:top-auto md:bottom-0 md:translate-y-0 md:right-[3%] lg:right-[5%] w-[78%] max-w-[300px] sm:max-w-[360px] md:w-[55%] md:max-w-[520px] lg:w-[48%] lg:max-w-[620px] pointer-events-none">
+      {/* Yakira — mobile: top, horizontally centered above the heading;
+          desktop: bottom side composition. Outer handles positioning,
+          inner handles inline parallax/opacity so transforms don't clash. */}
+      <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[68%] max-w-[280px] sm:top-[8%] sm:max-w-[340px] md:top-auto md:bottom-0 md:left-auto md:translate-x-0 md:right-[3%] lg:right-[5%] md:w-[55%] md:max-w-[520px] lg:w-[48%] lg:max-w-[620px] pointer-events-none">
         <div
           style={{
             opacity: Math.max(0, 1 - scrollY / 800),
@@ -46,7 +46,7 @@ export default function Hero() {
             alt="Yakira, NeuroMonkey AI"
             width={864}
             height={1184}
-            className="w-full h-auto opacity-35 md:opacity-100"
+            className="w-full h-auto"
             priority
           />
         </div>
