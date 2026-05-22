@@ -1,52 +1,25 @@
-import { HeroSection } from "@/components/hero-section"
-import { IndustryAISection } from "@/components/industry-ai-section"
-import { BentoSection } from "@/components/bento-section"
-import { DigitalServicesSection } from "@/components/digital-services-section"
-import { TestimonialGridSection } from "@/components/testimonial-grid-section"
-import { FAQSection } from "@/components/faq-section"
-import { CTASection } from "@/components/cta-section"
-import { FooterSection } from "@/components/footer-section"
-import { AnimatedSection } from "@/components/animated-section"
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
+import Services from "@/components/Services";
+import Process from "@/components/Process";
+import Team from "@/components/Team";
+import Testimonials from "@/components/Testimonials";
+import CTA from "@/components/CTA";
+import Footer from "@/components/Footer";
 
-export default function LandingPage() {
+export default function Home() {
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden pb-0">
-      <div className="relative z-10">
-        <main className="relative w-full">
-          <HeroSection />
-        </main>
-        <AnimatedSection id="industry-insights" className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-8" delay={0.1}>
-          <IndustryAISection />
-        </AnimatedSection>
-        <AnimatedSection id="ai-services" className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-16" delay={0.2}>
-          <BentoSection />
-        </AnimatedSection>
-        <AnimatedSection id="digital-services" className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-8 md:mt-16" delay={0.2}>
-          <DigitalServicesSection />
-        </AnimatedSection>
-        <AnimatedSection
-          id="testimonials"
-          className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-8 md:mt-16"
-          delay={0.2}
-        >
-          <TestimonialGridSection />
-        </AnimatedSection>
-        <AnimatedSection id="faq" className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-8 md:mt-16" delay={0.2}>
-          <FAQSection />
-        </AnimatedSection>
-        <AnimatedSection className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-8 md:mt-16" delay={0.2}>
-          <CTASection />
-        </AnimatedSection>
-        <AnimatedSection className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mt-8 md:mt-16" delay={0.2}>
-          <FooterSection />
-        </AnimatedSection>
-        {/* Copyright - Very bottom of website */}
-        <div className="relative z-10 w-full py-4 border-t border-gray-800 text-center bg-background">
-          <p className="text-xs text-gray-500">
-            Copyright © Neuro Monkey 2026
-          </p>
-        </div>
-      </div>
-    </div>
-  )
+    <>
+      <Navbar />
+      <Hero />
+      <Stats />
+      <Services />
+      <Process />
+      <Team />
+      <Testimonials />
+      <CTA />
+      <Footer />
+    </>
+  );
 }

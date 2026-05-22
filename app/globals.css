@@ -4,41 +4,48 @@
 
 @layer base {
   :root {
-    /* Themeable Colors - Updated to Purple Gradient Theme */
-    --background: 240 15% 9%; /* Dark purple background */
-    --foreground: 240 5% 96%; /* Light text */
+    /* Core */
+    --background: 0 0% 0%; /* #000000 */
+    --foreground: 0 0% 100%; /* #ffffff */
 
-    --muted: 240 8% 15%; /* Darker purple for muted elements */
-    --muted-foreground: 240 5% 70%; /* Muted text */
-    --muted-foreground-light: 240 5% 60%;
-    --muted-foreground-dark: 240 5% 65%;
+    /* Brand */
+    --brand-blue: 240 100% 39%; /* #0000C8 */
+    --brand-purple: 290 100% 39%; /* #A600C8 */
 
-    --card: 240 10% 12% / 0.8; /* Card background with transparency */
-    --card-foreground: 240 5% 96%;
+    /* Surfaces */
+    --card: 240 36% 7%; /* #0a0a1a */
+    --card-foreground: 0 0% 100%;
+    --popover: 240 36% 7%;
+    --popover-foreground: 0 0% 100%;
 
-    --popover: 240 15% 9%;
-    --popover-foreground: 240 5% 96%;
+    /* Muted */
+    --muted: 240 20% 12%;
+    --muted-foreground: 215 16% 47%; /* #64748b */
 
-    /* Primary Accent Colors - Updated to Purple Gradient */
-    --primary: 270 100% 70%; /* Bright purple */
-    --primary-foreground: 240 15% 9%; /* Dark text on purple */
-    --primary-dark: 280 100% 60%; /* Darker purple */
-    --primary-light: 260 100% 80%; /* Lighter purple */
+    /* Borders */
+    --border: 240 28% 14%; /* #1a1a2e */
+    --input: 240 28% 14%;
+    --ring: 240 100% 50%;
 
-    /* Secondary Accent Colors (for buttons, etc.) - Updated */
-    --secondary: 240 5% 96%; /* Light for contrast */
-    --secondary-foreground: 240 15% 9%; /* Dark text */
+    /* Primary (used by VapiCallButton — bright purple) */
+    --primary: 270 100% 70%;
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 280 100% 60%;
+    --primary-light: 260 100% 80%;
 
-    --accent: 270 50% 25%; /* Purple accent */
-    --accent-foreground: 240 5% 96%;
+    /* Secondary */
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 0%;
 
-    --border: 240 100% 100% / 0.1; /* Subtle borders */
-    --border-light: 240 10% 20% / 0.3;
-    --border-dark: 240 10% 15% / 0.2;
+    /* Accent */
+    --accent: 270 50% 25%;
+    --accent-foreground: 0 0% 100%;
 
-    --ring: 270 100% 70%;
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --radius: 0.75rem; /* Slightly more rounded */
+    --radius: 0.5rem;
   }
 }
 
@@ -46,99 +53,81 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground;
-    background: linear-gradient(135deg, hsl(240 15% 9%) 0%, hsl(280 20% 15%) 50%, hsl(240 15% 9%) 100%);
-    min-height: 100vh;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  }
+  /* Section anchor offset under fixed navbar */
+  [id] {
+    scroll-margin-top: 96px;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #1a1a2e transparent;
   }
 }
 
 @layer utilities {
-  @keyframes glow {
-    0%, 100% {
-      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 40px rgba(168, 85, 247, 0.2);
-    }
-    50% {
-      box-shadow: 0 0 30px rgba(168, 85, 247, 0.6), 0 0 60px rgba(168, 85, 247, 0.3);
-    }
+  /* Brand gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #0000c8, #a600c8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
+  /* Brand gradient border */
+  .gradient-border {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
+      linear-gradient(135deg, #0000c8, #a600c8) border-box;
+  }
+
+  /* Glow accents */
+  .glow-blue {
+    box-shadow: 0 0 40px rgba(0, 0, 200, 0.15);
+  }
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(166, 0, 200, 0.15);
+  }
+
+  /* Vapi button glow animation */
+  @keyframes glow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 20px rgba(168, 85, 247, 0.4),
+        0 0 40px rgba(168, 85, 247, 0.2);
+    }
+    50% {
+      box-shadow:
+        0 0 30px rgba(168, 85, 247, 0.6),
+        0 0 60px rgba(168, 85, 247, 0.3);
+    }
+  }
   .animate-glow {
     animation: glow 3s ease-in-out infinite;
   }
 
-  /* Animation delays for neural network */
-  .delay-200 {
-    animation-delay: 200ms;
-  }
-  .delay-300 {
-    animation-delay: 300ms;
-  }
-  .delay-500 {
-    animation-delay: 500ms;
-  }
-  .delay-600 {
-    animation-delay: 600ms;
-  }
-  .delay-700 {
-    animation-delay: 700ms;
-  }
-  .delay-800 {
-    animation-delay: 800ms;
-  }
-  .delay-1000 {
-    animation-delay: 1000ms;
-  }
-
-  /* Animated drawing effect for neural network lines */
-  @keyframes draw {
-    0% {
-      stroke-dashoffset: 0;
-      opacity: 0.3;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      stroke-dashoffset: 16;
-      opacity: 0.3;
-    }
-  }
-
-  .animate-draw {
-    animation: draw 3s linear infinite;
-  }
-
-  /* 3D DNA Helix Rotation Animation */
-  @keyframes dnaRotate3D {
-    0% {
-      transform: rotateY(0deg) rotateX(15deg);
-    }
-    100% {
-      transform: rotateY(360deg) rotateX(15deg);
-    }
-  }
-
-  .animate-dna-rotate-3d {
-    animation: dnaRotate3D 52s linear infinite;
-    transform-style: preserve-3d;
-  }
-
-  /* Subtle bounce animation for tooltip */
+  /* Vapi tooltip subtle bounce */
   @keyframes bounceSubtle {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
     }
     50% {
       transform: translateY(-5px);
     }
   }
-
   .animate-bounce-subtle {
     animation: bounceSubtle 2s ease-in-out infinite;
   }
 
-  /* Fade in animation for tooltip text changes */
+  /* Vapi tooltip fade-in */
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -149,8 +138,18 @@
       transform: translateY(0);
     }
   }
-
   .animate-fade-in {
     animation: fadeIn 0.4s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

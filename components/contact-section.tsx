@@ -1,12 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState } from "react";
+import { ArrowRight } from "lucide-react";
+
+const COUNTRY_CODES = [
+  { code: "+94", label: "🇱🇰 +94" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+91", label: "🇮🇳 +91" },
+  { code: "+61", label: "🇦🇺 +61" },
+  { code: "+971", label: "🇦🇪 +971" },
+  { code: "+974", label: "🇶🇦 +974" },
+];
+
+const SERVICES = [
+  { value: "ai-solutions", label: "AI Solutions" },
+  { value: "digital-solutions", label: "Digital Solutions" },
+  { value: "consultation", label: "Consultation" },
+  { value: "other", label: "Other" },
+];
+
+const INPUT_CLS =
+  "w-full bg-transparent border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-white/40 focus:outline-none transition-colors";
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -16,42 +31,33 @@ export function ContactSection() {
     countryCode: "+94",
     phone: "",
     serviceInterest: "",
-    message: ""
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
-
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
+
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      })
+      });
 
       if (response.ok) {
-        setIsSubmitted(true)
-        // Reset form after successful submission
+        setIsSubmitted(true);
         setTimeout(() => {
           setFormData({
             name: "",
@@ -60,188 +66,181 @@ export function ContactSection() {
             countryCode: "+94",
             phone: "",
             serviceInterest: "",
-            message: ""
-          })
-          setIsSubmitted(false)
-        }, 15000)
+            message: "",
+          });
+          setIsSubmitted(false);
+        }, 15000);
       } else {
-        console.error('Failed to submit form')
-        // You might want to show an error message to the user here
+        setError("Something went wrong. Try emailing us directly.");
       }
-    } catch (error) {
-      console.error('Error submitting form:', error)
-      // You might want to show an error message to the user here
+    } catch {
+      setError("Network error. Try emailing us directly.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
-    <section id="contact" className="relative py-16 px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-4">
-            Get In Touch
+    <section id="contact" className="max-w-3xl mx-auto">
+      <p className="text-[11px] uppercase tracking-[0.3em] text-white/50 mb-4">
+        Contact
+      </p>
+      <h1 className="text-[2.5rem] md:text-[4rem] font-bold leading-[0.92] tracking-[-0.02em] mb-6">
+        Tell us what&apos;s
+        <br />
+        <span className="gradient-text">slowing you down</span>.
+      </h1>
+      <p className="text-white/60 text-sm md:text-base max-w-xl mb-16">
+        Fill in the form and we&apos;ll get back within 24 hours. If we can&apos;t
+        help, we&apos;ll tell you.
+      </p>
+
+      {isSubmitted ? (
+        <div className="border border-white/10 p-10 md:p-14">
+          <p className="text-[10px] uppercase tracking-[0.3em] text-white/40 mb-4">
+            Message received
+          </p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Thanks — we&apos;re on it.
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Ready to transform your business with AI? Contact us today and let's discuss how we can help you achieve your goals.
+          <p className="text-sm text-white/60 leading-relaxed max-w-md">
+            Our team has your inquiry. We typically reply within 24 hours on
+            business days. If it&apos;s urgent, WhatsApp us at +94 77 124 5678.
           </p>
         </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
+            <label className="block">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-white/40 block mb-2">
+                Full name *
+              </span>
+              <input
+                name="name"
+                type="text"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                placeholder="Your name"
+                className={INPUT_CLS}
+              />
+            </label>
 
-        <div className="flex justify-center">
-          <Card className="w-full max-w-md bg-white/5 border-white/10 backdrop-blur-sm">
-            {!isSubmitted && (
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl font-bold text-white">Contact Us</CardTitle>
-                <CardDescription className="text-gray-400">
-                  Fill out the form below and we'll get back to you within 24 hours.
-                </CardDescription>
-              </CardHeader>
-            )}
-            <CardContent>
-              {isSubmitted ? (
-                <div className="text-center py-8 px-4">
-                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-3">Message Received!</h3>
-                  <p className="text-gray-300 mb-4">
-                    Thank you for reaching out to NeuroMonkey.AI. Our team has received your inquiry and will review it shortly.
-                  </p>
-                  <p className="text-gray-400 text-sm">
-                    We typically respond within 24 hours during business days. If your matter is urgent, please feel free to call us directly.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="text-white">Full Name *</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                      placeholder="Enter your full name"
-                    />
-                  </div>
+            <label className="block">
+              <span className="text-[10px] uppercase tracking-[0.25em] text-white/40 block mb-2">
+                Email *
+              </span>
+              <input
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="you@company.com"
+                className={INPUT_CLS}
+              />
+            </label>
+          </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-white">Email Address *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                      placeholder="Enter your email address"
-                    />
-                  </div>
+          <label className="block">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-white/40 block mb-2">
+              Company
+            </span>
+            <input
+              name="companyName"
+              type="text"
+              value={formData.companyName}
+              onChange={handleChange}
+              placeholder="Optional"
+              className={INPUT_CLS}
+            />
+          </label>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="companyName" className="text-white">Company Name</Label>
-                    <Input
-                      id="companyName"
-                      name="companyName"
-                      type="text"
-                      value={formData.companyName}
-                      onChange={handleInputChange}
-                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                      placeholder="Enter your company name (optional)"
-                    />
-                  </div>
+          <label className="block">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-white/40 block mb-2">
+              Phone *
+            </span>
+            <div className="flex gap-3">
+              <select
+                name="countryCode"
+                value={formData.countryCode}
+                onChange={handleChange}
+                className={`${INPUT_CLS} w-32`}
+              >
+                {COUNTRY_CODES.map(({ code, label }) => (
+                  <option key={code} value={code} className="bg-black">
+                    {label}
+                  </option>
+                ))}
+              </select>
+              <input
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                placeholder="77 124 5678"
+                className={`${INPUT_CLS} flex-1`}
+              />
+            </div>
+          </label>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-white">Phone Number *</Label>
-                    <div className="flex gap-2">
-                      <Select
-                        value={formData.countryCode}
-                        onValueChange={(value) => handleSelectChange("countryCode", value)}
-                      >
-                        <SelectTrigger className="w-[110px] bg-white/5 border-white/10 text-white focus:border-primary focus:ring-primary">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="+94">🇱🇰 +94</SelectItem>
-                          <SelectItem value="+1">🇺🇸 +1</SelectItem>
-                          <SelectItem value="+44">🇬🇧 +44</SelectItem>
-                          <SelectItem value="+91">🇮🇳 +91</SelectItem>
-                          <SelectItem value="+61">🇦🇺 +61</SelectItem>
-                          <SelectItem value="+971">🇦🇪 +971</SelectItem>
-                          <SelectItem value="+974">🇶🇦 +974</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary"
-                        placeholder="Enter your phone number"
-                      />
-                    </div>
-                  </div>
+          <label className="block">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-white/40 block mb-2">
+              What do you need? *
+            </span>
+            <select
+              name="serviceInterest"
+              value={formData.serviceInterest}
+              onChange={handleChange}
+              required
+              className={INPUT_CLS}
+            >
+              <option value="" disabled className="bg-black">
+                Pick one
+              </option>
+              {SERVICES.map(({ value, label }) => (
+                <option key={value} value={value} className="bg-black">
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="serviceInterest" className="text-white">Service Interest *</Label>
-                    <Select
-                      value={formData.serviceInterest}
-                      onValueChange={(value) => handleSelectChange("serviceInterest", value)}
-                      required
-                    >
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white focus:border-primary focus:ring-primary">
-                        <SelectValue placeholder="Select a service" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="ai-solutions">AI Solutions</SelectItem>
-                        <SelectItem value="digital-solutions">Digital Solutions</SelectItem>
-                        <SelectItem value="consultation">Consultation</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+          <label className="block">
+            <span className="text-[10px] uppercase tracking-[0.25em] text-white/40 block mb-2">
+              Tell us more *
+            </span>
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              rows={5}
+              placeholder="What's broken? What takes too long? What should just happen automatically?"
+              className={INPUT_CLS}
+            />
+          </label>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="text-white">Message / Requirements *</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      required
-                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-primary focus:ring-primary min-h-[120px]"
-                      placeholder="Tell us about your project or requirements..."
-                    />
-                  </div>
+          {error && (
+            <p className="text-xs text-red-400 border border-red-500/30 px-4 py-3">
+              {error}
+            </p>
+          )}
 
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-semibold py-3 rounded-lg transition-all duration-200"
-                  >
-                    {isSubmitting ? (
-                      <div className="flex items-center gap-2">
-                        <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-                        Sending...
-                      </div>
-                    ) : (
-                      "Send Message"
-                    )}
-                  </Button>
-                </form>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-      </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="group flex items-center justify-between w-full bg-white text-black font-semibold px-8 py-5 text-sm hover:bg-white/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            <span>{isSubmitting ? "Sending…" : "Send message"}</span>
+            <ArrowRight
+              size={16}
+              className="group-hover:translate-x-2 transition-transform"
+            />
+          </button>
+        </form>
+      )}
     </section>
-  )
+  );
 }
