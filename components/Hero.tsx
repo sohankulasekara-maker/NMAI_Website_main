@@ -31,9 +31,9 @@ export default function Hero() {
         }}
       />
 
-      {/* Yakira — mobile: behind text, low opacity; desktop: side composition */}
+      {/* Yakira — mobile: top-right above text; desktop: side composition */}
       <div
-        className="absolute right-0 bottom-0 w-[80%] max-w-[320px] sm:max-w-[380px] md:right-[3%] md:w-[55%] md:max-w-[520px] lg:right-[5%] lg:w-[48%] lg:max-w-[620px] pointer-events-none"
+        className="absolute right-0 top-[8%] w-[78%] max-w-[300px] sm:top-[6%] sm:max-w-[360px] md:right-[3%] md:top-auto md:bottom-0 md:w-[55%] md:max-w-[520px] lg:right-[5%] lg:w-[48%] lg:max-w-[620px] pointer-events-none"
         style={{
           opacity: Math.max(0, 1 - scrollY / 800),
           transform: `translateY(${scrollY * 0.15}px)`,
@@ -44,7 +44,7 @@ export default function Hero() {
           alt="Yakira, NeuroMonkey AI"
           width={864}
           height={1184}
-          className="w-full h-auto opacity-30 md:opacity-100"
+          className="w-full h-auto opacity-60 md:opacity-100"
           priority
         />
       </div>
