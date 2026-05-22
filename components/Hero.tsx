@@ -46,7 +46,7 @@ export default function Hero() {
             alt="Yakira, NeuroMonkey AI"
             width={864}
             height={1184}
-            className="w-full h-auto opacity-60 md:opacity-100"
+            className="w-full h-auto opacity-35 md:opacity-100"
             priority
           />
         </div>
