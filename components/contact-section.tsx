@@ -20,8 +20,9 @@ const SERVICES = [
   { value: "other", label: "Other" },
 ];
 
-const INPUT_CLS =
-  "w-full bg-transparent border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-white/40 focus:outline-none transition-colors";
+const INPUT_BASE =
+  "bg-transparent border border-white/10 px-4 py-3 text-sm text-white placeholder-white/30 focus:border-white/40 focus:outline-none transition-colors";
+const INPUT_CLS = `${INPUT_BASE} w-full`;
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
@@ -165,7 +166,7 @@ export function ContactSection() {
                 name="countryCode"
                 value={formData.countryCode}
                 onChange={handleChange}
-                className={`${INPUT_CLS} w-32`}
+                className={`${INPUT_BASE} w-32 shrink-0`}
               >
                 {COUNTRY_CODES.map(({ code, label }) => (
                   <option key={code} value={code} className="bg-black">
