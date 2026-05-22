@@ -31,22 +31,25 @@ export default function Hero() {
         }}
       />
 
-      {/* Yakira — mobile: top-right above text; desktop: side composition */}
-      <div
-        className="absolute right-0 top-[8%] w-[78%] max-w-[300px] sm:top-[6%] sm:max-w-[360px] md:right-[3%] md:top-auto md:bottom-0 md:w-[55%] md:max-w-[520px] lg:right-[5%] lg:w-[48%] lg:max-w-[620px] pointer-events-none"
-        style={{
-          opacity: Math.max(0, 1 - scrollY / 800),
-          transform: `translateY(${scrollY * 0.15}px)`,
-        }}
-      >
-        <Image
-          src="/yakira-hero.png"
-          alt="Yakira, NeuroMonkey AI"
-          width={864}
-          height={1184}
-          className="w-full h-auto opacity-60 md:opacity-100"
-          priority
-        />
+      {/* Yakira — mobile: vertically centered; desktop: bottom side composition.
+          Outer div handles centering on mobile (Tailwind -translate-y-1/2),
+          inner div handles the inline parallax/opacity so they don't collide. */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 md:top-auto md:bottom-0 md:translate-y-0 md:right-[3%] lg:right-[5%] w-[78%] max-w-[300px] sm:max-w-[360px] md:w-[55%] md:max-w-[520px] lg:w-[48%] lg:max-w-[620px] pointer-events-none">
+        <div
+          style={{
+            opacity: Math.max(0, 1 - scrollY / 800),
+            transform: `translateY(${scrollY * 0.15}px)`,
+          }}
+        >
+          <Image
+            src="/yakira-hero.png"
+            alt="Yakira, NeuroMonkey AI"
+            width={864}
+            height={1184}
+            className="w-full h-auto opacity-60 md:opacity-100"
+            priority
+          />
+        </div>
       </div>
 
       {/* Text — parallax faster */}
