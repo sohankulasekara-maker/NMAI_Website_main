@@ -24,7 +24,7 @@ export default function Footer() {
           <div>
             <p className="text-[10px] uppercase tracking-[0.3em] text-white/50 mb-4">Contact</p>
             <div className="space-y-2 text-[11px] text-white/60">
-              <p>info@neuromonkey.ai</p>
+              <p>neuromonky.ai@gmail.com</p>
               <p>+94 77 124 5678</p>
               <p>Colombo, Sri Lanka</p>
             </div>

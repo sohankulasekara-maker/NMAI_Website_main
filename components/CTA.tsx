@@ -21,8 +21,8 @@ export default function CTA() {
                 <span>WhatsApp us. Fastest way.</span>
                 <ArrowRight size={16} className="shrink-0 group-hover:translate-x-2 transition-transform" />
               </a>
-              <a href="mailto:info@neuromonkey.ai" className="flex items-center justify-between gap-4 border border-white/10 text-white/60 px-5 sm:px-8 py-4 sm:py-5 text-sm hover:border-white/30 hover:text-white transition-colors group">
-                <span className="truncate">info@neuromonkey.ai</span>
+              <a href="mailto:neuromonky.ai@gmail.com" className="flex items-center justify-between gap-4 border border-white/10 text-white/60 px-5 sm:px-8 py-4 sm:py-5 text-sm hover:border-white/30 hover:text-white transition-colors group">
+                <span className="truncate">neuromonky.ai@gmail.com</span>
                 <ArrowRight size={16} className="shrink-0 group-hover:translate-x-2 transition-transform" />
               </a>
               <a href="tel:+94771245678" className="flex items-center justify-between gap-4 border border-white/10 text-white/60 px-5 sm:px-8 py-4 sm:py-5 text-sm hover:border-white/30 hover:text-white transition-colors group">

@@ -78,7 +78,7 @@ export default function Navbar() {
 
           <div className="px-8 md:px-12 pb-8 space-y-3">
             <div className="h-px bg-white/10 mb-6" />
-            <p className="text-[11px] text-white/30">info@neuromonkey.ai</p>
+            <p className="text-[11px] text-white/30">neuromonky.ai@gmail.com</p>
             <p className="text-[11px] text-white/30">+94 77 124 5678</p>
             <p className="text-[11px] text-white/30">Colombo, Sri Lanka</p>
             <div className="flex gap-4 pt-2">

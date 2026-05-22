@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     // Send email using Resend
     await resend.emails.send({
       from: 'contact@neuromonkey.ai',
-      to: ['Neuromonkey.ai@gmail.com'],
+      to: ['neuromonky.ai@gmail.com'],
       subject: `New Contact Form: ${serviceLabels[serviceInterest] || serviceInterest} - ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
