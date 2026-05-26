@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-16 py-10 md:py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2">
-            <Image src="/logo.png" alt="NeuroMonkey AI" width={80} height={24} className="mb-4 h-auto w-auto" style={{ objectFit: "contain" }} />
+            <Image src="/logo.png" alt="NeuroMonkey AI" width={80} height={24} className="mb-4 h-auto w-auto" style={{ objectFit: "contain", transform: "scaleX(-1)" }} />
             <p className="text-[11px] text-white/60 leading-relaxed max-w-xs">
               Smart Automation for Modern Businesses. We build AI systems that save time, reduce costs, and scale your operations.
             </p>
