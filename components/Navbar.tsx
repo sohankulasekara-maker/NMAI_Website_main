@@ -31,7 +31,7 @@ export default function Navbar() {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-black/90 backdrop-blur-md" : "bg-transparent"}`}>
         <div className="w-full px-6 sm:px-8 md:px-16 h-[64px] md:h-[70px] flex items-center justify-between">
           <a href="/" className="shrink-0">
-            <Image src="/logo.png" alt="NeuroMonkey AI" width={75} height={22} style={{ objectFit: "contain", transform: "scaleX(-1)" }} priority />
+            <Image src="/logo.png" alt="NeuroMonkey AI" width={75} height={22} style={{ objectFit: "contain" }} priority />
           </a>
 
           <button
